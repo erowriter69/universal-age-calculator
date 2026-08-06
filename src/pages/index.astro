@@ -1,11 +1,2980 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+const pageTitle =
+	"Universal Age Calculator – Exact Age, Hijri Date, Persian Date & Zodiac";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageDescription =
+	"Calculate your exact age in years, months and days. Discover your Hijri and Persian birth dates, Chinese zodiac, next birthday and lifetime statistics.";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="en">
+	<script
+	type="application/ld+json"
+	set:html={JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebApplication",
+		name: "Universal Age Calculator",
+		url: "https://example.com/",
+		description: pageDescription,
+		applicationCategory: "UtilitiesApplication",
+		operatingSystem: "Any",
+		browserRequirements: "Requires JavaScript",
+		offers: {
+			"@type": "Offer",
+			price: "0",
+			priceCurrency: "USD",
+		},
+		featureList: [
+			"Exact age calculation",
+			"Birthday countdown",
+			"Hijri calendar conversion",
+			"Persian calendar conversion",
+			"Chinese zodiac calculation",
+			"Lifetime statistics",
+			"Downloadable age card",
+		],
+	})}
+/>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		
+		<link rel="canonical" href="https://example.com/" />
+
+<meta property="og:url" content="https://example.com/" />
+<meta property="og:image" content="https://example.com/og-image.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content="https://example.com/og-image.png" />
+
+		<meta name="theme-color" content="#6657ff" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<script is:inline>
+			(function () {
+				const savedTheme = localStorage.getItem("age-calculator-theme");
+				const prefersDark = window.matchMedia(
+					"(prefers-color-scheme: dark)",
+				).matches;
+
+				if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+					document.documentElement.dataset.theme = "dark";
+				}
+			})();
+		</script>
+	</head>
+
+	<body>
+		<header class="site-header">
+			<div class="container header-inner">
+				<a class="brand" href="/" aria-label="Universal Age Calculator home">
+					<span class="brand-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24">
+							<path
+								d="M12 2.75a1 1 0 0 1 .93.63l1.5 3.76a4 4 0 0 0 2.24 2.24l3.76 1.5a1 1 0 0 1 0 1.86l-3.76 1.5a4 4 0 0 0-2.24 2.24l-1.5 3.76a1 1 0 0 1-1.86 0l-1.5-3.76a4 4 0 0 0-2.24-2.24l-3.76-1.5a1 1 0 0 1 0-1.86l3.76-1.5a4 4 0 0 0 2.24-2.24l1.5-3.76a1 1 0 0 1 .93-.63Z"
+							></path>
+						</svg>
+					</span>
+
+					<span class="brand-copy">
+						<strong>Universal</strong>
+						<small>Age Calculator</small>
+					</span>
+				</a>
+
+				<div class="header-actions">
+					<span class="header-badge">Free online tool</span>
+
+					<button
+						id="theme-toggle"
+						class="theme-toggle"
+						type="button"
+						aria-label="Switch to dark mode"
+						title="Change colour theme"
+					>
+						<svg
+							class="sun-icon"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<circle cx="12" cy="12" r="4"></circle>
+							<path d="M12 2v2"></path>
+							<path d="M12 20v2"></path>
+							<path d="m4.93 4.93 1.42 1.42"></path>
+							<path d="m17.66 17.66 1.41 1.41"></path>
+							<path d="M2 12h2"></path>
+							<path d="M20 12h2"></path>
+							<path d="m6.34 17.66-1.41 1.41"></path>
+							<path d="m19.07 4.93-1.41 1.41"></path>
+						</svg>
+
+						<svg
+							class="moon-icon"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"
+							></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section class="hero">
+				<div class="container hero-inner">
+					<div class="hero-copy">
+						<p class="eyebrow">More than a birthday calculator</p>
+
+						<h1>Calculate your exact age instantly.</h1>
+
+						<p class="hero-description">
+							Find your age in years, months, weeks, days, hours and
+							seconds. Discover your next birthday, world calendar dates,
+							Chinese zodiac and fascinating lifetime statistics.
+						</p>
+
+						<div class="feature-row" aria-label="Calculator features">
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Exact age
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								World calendars
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Lifetime statistics
+							</span>
+						</div>
+					</div>
+
+					<div class="calculator-card">
+						<div class="calculator-heading">
+							<div>
+								<p class="card-label">Start here</p>
+								<h2>Enter your birth date</h2>
+							</div>
+
+							<div class="card-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="3" y="5" width="18" height="16" rx="2"></rect>
+									<path d="M16 3v4"></path>
+									<path d="M8 3v4"></path>
+									<path d="M3 11h18"></path>
+								</svg>
+							</div>
+						</div>
+
+						<form id="age-form" novalidate>
+							<label for="birth-date">Date of birth</label>
+
+							<input
+								id="birth-date"
+								name="birthDate"
+								type="date"
+								required
+								autocomplete="bday"
+							/>
+
+							<p id="form-error" class="form-error" role="alert"></p>
+
+							<button type="submit">
+								<span>Calculate my age</span>
+
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M5 12h14"></path>
+									<path d="m13 6 6 6-6 6"></path>
+								</svg>
+							</button>
+						</form>
+
+						<p class="privacy-note">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<rect x="5" y="10" width="14" height="11" rx="2"></rect>
+								<path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+							</svg>
+
+							Your birth date stays in your browser and is never uploaded.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="results-section" class="results-section" hidden>
+				<div class="container">
+					<div class="section-heading">
+						<p class="eyebrow">Your personalised results</p>
+						<h2>Your life in numbers</h2>
+
+						<p id="result-introduction">
+							Here is your age calculated from your selected birth date.
+						</p>
+					</div>
+
+					<div class="age-highlight">
+						<div class="age-unit">
+							<strong id="age-years" data-animate="0">0</strong>
+							<span>Years</span>
+						</div>
+
+						<div class="age-divider" aria-hidden="true"></div>
+
+						<div class="age-unit">
+							<strong id="age-months" data-animate="0">0</strong>
+							<span>Months</span>
+						</div>
+
+						<div class="age-divider" aria-hidden="true"></div>
+
+						<div class="age-unit">
+							<strong id="age-days" data-animate="0">0</strong>
+							<span>Days</span>
+						</div>
+					</div>
+
+					<div class="result-grid">
+						<article class="result-card">
+							<div class="result-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<path d="M4 10h16v10H4z"></path>
+									<path d="M12 4v6"></path>
+									<path d="M8 7h8"></path>
+									<path d="M4 14h16"></path>
+									<path d="M7 10V8"></path>
+									<path d="M17 10V8"></path>
+								</svg>
+							</div>
+
+							<p>Next birthday</p>
+							<strong id="next-birthday">—</strong>
+							<span id="next-birthday-date">—</span>
+						</article>
+
+						<article class="result-card">
+							<div class="result-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="3" y="5" width="18" height="16" rx="2"></rect>
+									<path d="M16 3v4"></path>
+									<path d="M8 3v4"></path>
+									<path d="M3 11h18"></path>
+									<path d="M8 15h.01"></path>
+									<path d="M12 15h.01"></path>
+									<path d="M16 15h.01"></path>
+								</svg>
+							</div>
+
+							<p>Born on</p>
+							<strong id="birth-weekday">—</strong>
+							<span id="formatted-birth-date">—</span>
+						</article>
+
+						<article class="result-card">
+							<div class="result-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<circle cx="12" cy="12" r="9"></circle>
+									<path d="M3 12h18"></path>
+									<path d="M12 3a15 15 0 0 1 0 18"></path>
+									<path d="M12 3a15 15 0 0 0 0 18"></path>
+								</svg>
+							</div>
+
+							<p>Earth journeys</p>
+							<strong id="earth-orbits">—</strong>
+							<span>Completed journeys around the Sun</span>
+						</article>
+
+						<article class="result-card">
+							<div class="result-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<path
+										d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"
+									></path>
+								</svg>
+							</div>
+
+							<p>Moon cycles</p>
+							<strong id="moon-cycles">—</strong>
+							<span>Approximately completed</span>
+						</article>
+					</div>
+
+					<section class="world-calendar-panel">
+						<div class="panel-heading">
+							<div>
+								<p class="card-label">World calendars</p>
+								<h3>Your birth date around the world</h3>
+							</div>
+
+							<p>
+								The same day represented through different calendar
+								traditions.
+							</p>
+						</div>
+
+						<div class="calendar-grid">
+							<article class="calendar-card hijri-card">
+								<div class="calendar-card-top">
+									<div class="calendar-symbol" aria-hidden="true">
+										<svg viewBox="0 0 24 24">
+											<path
+												d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"
+											></path>
+											<path d="m17.5 3.5.5 1.2 1.2.5-1.2.5-.5 1.2-.5-1.2-1.2-.5 1.2-.5Z"></path>
+										</svg>
+									</div>
+
+									<span>Islamic calendar</span>
+								</div>
+
+								<p class="calendar-name">Hijri birth date</p>
+
+<div class="calendar-date-display">
+	<strong id="hijri-day">—</strong>
+
+	<div>
+		<span id="hijri-month">—</span>
+		<b id="hijri-year">—</b>
+	</div>
+</div>
+
+<p id="hijri-birth-date" class="accessible-calendar-date">—</p>
+
+								<div class="calendar-detail">
+									<span>Current Hijri date</span>
+									<b id="hijri-current-date">—</b>
+								</div>
+							</article>
+
+							<article class="calendar-card persian-card">
+								<div class="calendar-card-top">
+									<div class="calendar-symbol" aria-hidden="true">
+										<svg viewBox="0 0 24 24">
+											<circle cx="12" cy="12" r="4"></circle>
+											<path d="M12 2v2"></path>
+											<path d="M12 20v2"></path>
+											<path d="m4.93 4.93 1.42 1.42"></path>
+											<path d="m17.66 17.66 1.41 1.41"></path>
+											<path d="M2 12h2"></path>
+											<path d="M20 12h2"></path>
+											<path d="m6.34 17.66-1.41 1.41"></path>
+											<path d="m19.07 4.93-1.41 1.41"></path>
+										</svg>
+									</div>
+
+									<span>Persian calendar</span>
+								</div>
+
+								<p class="calendar-name">Solar Hijri birth date</p>
+
+<div class="calendar-date-display">
+	<strong id="persian-day">—</strong>
+
+	<div>
+		<span id="persian-month">—</span>
+		<b id="persian-year">—</b>
+	</div>
+</div>
+
+<p id="persian-birth-date" class="accessible-calendar-date">—</p>
+
+								<div class="calendar-detail">
+									<span>Current Persian date</span>
+									<b id="persian-current-date">—</b>
+								</div>
+							</article>
+
+							<article class="calendar-card zodiac-card">
+								<div class="calendar-card-top">
+									<div class="calendar-symbol" aria-hidden="true">
+										<svg viewBox="0 0 24 24">
+											<path
+												d="M8 7c1.6-3 6.4-3 8 0 2.8.4 4 3.8 2 5.8 1.8 2.9-.9 6.4-4.2 5.5A4 4 0 0 1 6.2 18C3 18.5 1.4 14.7 4 12.7 2.2 9.8 4.9 6.5 8 7Z"
+											></path>
+											<path d="M9 10h.01"></path>
+											<path d="M15 10h.01"></path>
+											<path d="M9.5 14c1.5 1 3.5 1 5 0"></path>
+										</svg>
+									</div>
+
+									<span>Chinese zodiac</span>
+								</div>
+
+								<p class="calendar-name">Your zodiac sign</p>
+
+								<div class="zodiac-result">
+									<strong id="zodiac-animal">—</strong>
+									<span id="zodiac-element">—</span>
+								</div>
+
+								<p id="zodiac-description" class="zodiac-description">
+									—
+								</p>
+							</article>
+						</div>
+					</section>
+
+					<section class="statistics-panel">
+						<div class="statistics-heading">
+							<div>
+								<p class="card-label">Lifetime statistics</p>
+								<h3>How long have you lived?</h3>
+							</div>
+
+							<span class="live-indicator">
+								<span aria-hidden="true"></span>
+								Live
+							</span>
+						</div>
+
+						<div class="statistics-grid">
+							<div class="statistic">
+								<span>Total months</span>
+								<strong id="total-months">0</strong>
+							</div>
+
+							<div class="statistic">
+								<span>Total weeks</span>
+								<strong id="total-weeks">0</strong>
+							</div>
+
+							<div class="statistic">
+								<span>Total days</span>
+								<strong id="total-days">0</strong>
+							</div>
+
+							<div class="statistic">
+								<span>Total hours</span>
+								<strong id="total-hours">0</strong>
+							</div>
+
+							<div class="statistic">
+								<span>Total minutes</span>
+								<strong id="total-minutes">0</strong>
+							</div>
+
+							<div class="statistic">
+								<span>Total seconds</span>
+								<strong id="total-seconds">0</strong>
+							</div>
+						</div>
+					</section>
+
+					<section class="fun-statistics-panel">
+						<div class="panel-heading">
+							<div>
+								<p class="card-label">Fun estimates</p>
+								<h3>Your lifetime journey</h3>
+							</div>
+
+							<p>
+								These values are interesting general estimates, not
+								medical measurements.
+							</p>
+						</div>
+
+						<div class="fun-grid">
+							<article class="fun-card">
+								<div class="fun-icon heartbeat-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path
+											d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"
+										></path>
+										<path d="M3.5 12h4l1.5-3 3 7 2-4h6.5"></path>
+									</svg>
+								</div>
+
+								<div>
+									<span>Estimated heartbeats</span>
+									<strong id="estimated-heartbeats">0</strong>
+								</div>
+							</article>
+
+							<article class="fun-card">
+								<div class="fun-icon breath-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 5v14"></path>
+										<path d="M12 12c-2-4-7-5-8 0s4 7 8 3"></path>
+										<path d="M12 12c2-4 7-5 8 0s-4 7-8 3"></path>
+									</svg>
+								</div>
+
+								<div>
+									<span>Estimated breaths</span>
+									<strong id="estimated-breaths">0</strong>
+								</div>
+							</article>
+
+							<article class="fun-card">
+								<div class="fun-icon sleep-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path
+											d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"
+										></path>
+										<path d="M15 5h4l-4 4h4"></path>
+									</svg>
+								</div>
+
+								<div>
+									<span>Estimated hours asleep</span>
+									<strong id="estimated-sleep">0</strong>
+								</div>
+							</article>
+
+							<article class="fun-card">
+								<div class="fun-icon birthday-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M4 10h16v10H4z"></path>
+										<path d="M4 14h16"></path>
+										<path d="M12 4v6"></path>
+										<path d="M9 6c0-1 1-2 3-3 2 1 3 2 3 3"></path>
+									</svg>
+								</div>
+
+								<div>
+									<span>Birthdays completed</span>
+									<strong id="birthdays-completed">0</strong>
+								</div>
+							</article>
+						</div>
+					</section>
+
+					<section class="milestones-panel">
+						<div class="panel-heading">
+							<div>
+								<p class="card-label">During your lifetime</p>
+								<h3>Technology milestones</h3>
+							</div>
+
+							<p>
+								A selection of widely known developments that happened
+								after your birth.
+							</p>
+						</div>
+
+						<div id="timeline-list" class="timeline-list"></div>
+					</section>
+
+					<div class="result-actions">
+						<button id="download-card" class="primary-action" type="button">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 3v12"></path>
+								<path d="m7 10 5 5 5-5"></path>
+								<path d="M5 21h14"></path>
+							</svg>
+
+							Download age card
+						</button>
+
+						<button id="copy-results" class="secondary-action" type="button">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<rect x="9" y="9" width="11" height="11" rx="2"></rect>
+								<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+							</svg>
+
+							<span id="copy-button-text">Copy results</span>
+						</button>
+
+						<button id="calculate-again" class="secondary-action" type="button">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M3 12a9 9 0 1 0 3-6.7"></path>
+								<path d="M3 3v6h6"></path>
+							</svg>
+
+							Calculate again
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section class="information-section">
+				<div class="container information-grid">
+					<div>
+						<p class="eyebrow">Simple, private and precise</p>
+						<h2>What does this age calculator show?</h2>
+					</div>
+
+					<div class="information-copy">
+						<p>
+							The calculator compares your selected birth date with the
+							current date and displays your completed years, remaining
+							months and days.
+						</p>
+
+						<p>
+							It also converts your birth date into Islamic Hijri and
+							Persian calendar formats, estimates your Chinese zodiac, and
+							calculates how many weeks, days, hours, minutes and seconds
+							you have lived.
+						</p>
+
+						<p>
+							Everything is calculated inside your browser. Your date is
+							not uploaded to a server or stored in an online account.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="faq-section">
+				<div class="container">
+					<div class="section-heading faq-heading">
+						<p class="eyebrow">Frequently asked questions</p>
+						<h2>Age calculator questions</h2>
+					</div>
+
+					<div class="faq-list">
+						<details>
+							<summary>How is my exact age calculated?</summary>
+							<p>
+								Your exact age is calculated by comparing your birth year,
+								month and day with the current local date on your device.
+							</p>
+						</details>
+
+						<details>
+							<summary>Is my birth date saved?</summary>
+							<p>
+								No. The calculation happens locally in your browser and
+								your selected birth date is not uploaded by this website.
+							</p>
+						</details>
+
+						<details>
+							<summary>Are the heartbeat and sleep totals exact?</summary>
+							<p>
+								No. These are general estimates designed for entertainment.
+								Real values vary between individuals and throughout life.
+							</p>
+						</details>
+
+						<details>
+							<summary>Why can calendar dates vary between sources?</summary>
+							<p>
+								Calendar conversions can vary slightly depending on the
+								regional method, observation rules and calendar system used.
+							</p>
+						</details>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="container footer-inner">
+				<p>
+					© <span id="current-year"></span> Universal Age Calculator
+				</p>
+
+				<p>Built as a fast and private browser-based tool.</p>
+			</div>
+		</footer>
+
+		<script>
+			const form = document.querySelector("#age-form");
+			const birthDateInput = document.querySelector("#birth-date");
+			const formError = document.querySelector("#form-error");
+			const resultsSection = document.querySelector("#results-section");
+
+			const themeToggle = document.querySelector("#theme-toggle");
+			const downloadButton = document.querySelector("#download-card");
+			const copyButton = document.querySelector("#copy-results");
+			const calculateAgainButton = document.querySelector("#calculate-again");
+			const currentYearElement = document.querySelector("#current-year");
+
+			let selectedBirthDate = null;
+			let selectedResults = null;
+			let liveCounter = null;
+
+			const zodiacAnimals = [
+				"Rat",
+				"Ox",
+				"Tiger",
+				"Rabbit",
+				"Dragon",
+				"Snake",
+				"Horse",
+				"Goat",
+				"Monkey",
+				"Rooster",
+				"Dog",
+				"Pig",
+			];
+
+			const zodiacDescriptions = {
+				Rat: "Resourceful, adaptable and quick-thinking.",
+				Ox: "Patient, dependable and determined.",
+				Tiger: "Confident, courageous and energetic.",
+				Rabbit: "Thoughtful, graceful and compassionate.",
+				Dragon: "Ambitious, charismatic and imaginative.",
+				Snake: "Observant, intuitive and composed.",
+				Horse: "Independent, lively and adventurous.",
+				Goat: "Creative, gentle and considerate.",
+				Monkey: "Curious, inventive and playful.",
+				Rooster: "Observant, organised and confident.",
+				Dog: "Loyal, honest and protective.",
+				Pig: "Generous, sincere and warm-hearted.",
+			};
+
+			const technologyMilestones = [
+				{
+					year: 1991,
+					title: "The World Wide Web became publicly available",
+					description:
+						"The web began growing into the global information system used today.",
+				},
+				{
+					year: 1998,
+					title: "Google was founded",
+					description:
+						"Web search began changing how people discovered online information.",
+				},
+				{
+					year: 2001,
+					title: "Wikipedia launched",
+					description:
+						"A new collaborative online encyclopaedia became publicly available.",
+				},
+				{
+					year: 2004,
+					title: "Facebook launched",
+					description:
+						"Social networking entered a new era of worldwide growth.",
+				},
+				{
+					year: 2005,
+					title: "YouTube launched",
+					description:
+						"Online video sharing began becoming part of everyday internet culture.",
+				},
+				{
+					year: 2007,
+					title: "The first iPhone was released",
+					description:
+						"Touchscreen smartphones began reshaping mobile technology.",
+				},
+				{
+					year: 2008,
+					title: "Android's first commercial phone launched",
+					description:
+						"Android began developing into a major mobile operating system.",
+				},
+				{
+					year: 2010,
+					title: "Instagram launched",
+					description:
+						"Mobile photography and visual social media grew rapidly.",
+				},
+				{
+					year: 2015,
+					title: "Windows 10 was released",
+					description:
+						"Microsoft introduced a major new generation of Windows.",
+				},
+				{
+					year: 2020,
+					title: "PlayStation 5 and Xbox Series consoles launched",
+					description:
+						"A new generation of home gaming hardware began.",
+				},
+				{
+					year: 2022,
+					title: "Generative AI entered mainstream public use",
+					description:
+						"AI-powered writing and creative tools reached a much wider audience.",
+				},
+			];
+
+			if (currentYearElement) {
+				currentYearElement.textContent = String(new Date().getFullYear());
+			}
+
+			if (
+				!(form instanceof HTMLFormElement) ||
+				!(birthDateInput instanceof HTMLInputElement) ||
+				!(formError instanceof HTMLElement) ||
+				!(resultsSection instanceof HTMLElement)
+			) {
+				throw new Error("The age calculator could not be initialized.");
+			}
+
+			birthDateInput.max = formatDateForInput(new Date());
+
+			updateThemeButton();
+
+			themeToggle?.addEventListener("click", () => {
+				const isDark =
+					document.documentElement.dataset.theme === "dark";
+
+				if (isDark) {
+					delete document.documentElement.dataset.theme;
+					localStorage.setItem("age-calculator-theme", "light");
+				} else {
+					document.documentElement.dataset.theme = "dark";
+					localStorage.setItem("age-calculator-theme", "dark");
+				}
+
+				updateThemeButton();
+			});
+
+			form.addEventListener("submit", (event) => {
+				event.preventDefault();
+				formError.textContent = "";
+
+				if (!birthDateInput.value) {
+					formError.textContent = "Please select your date of birth.";
+					birthDateInput.focus();
+					return;
+				}
+
+				const birthDate = createLocalDate(birthDateInput.value);
+				const currentDate = new Date();
+
+				if (Number.isNaN(birthDate.getTime())) {
+					formError.textContent = "Please enter a valid birth date.";
+					return;
+				}
+
+				if (birthDate > currentDate) {
+					formError.textContent =
+						"Your birth date cannot be in the future.";
+					birthDateInput.focus();
+					return;
+				}
+
+				selectedBirthDate = birthDate;
+				selectedResults = updateResults(birthDate, currentDate);
+
+				resultsSection.hidden = false;
+
+				window.setTimeout(() => {
+					resultsSection.scrollIntoView({
+						behavior: "smooth",
+						block: "start",
+					});
+				}, 100);
+
+				if (liveCounter !== null) {
+					window.clearInterval(liveCounter);
+				}
+
+				liveCounter = window.setInterval(() => {
+					if (selectedBirthDate) {
+						updateLiveStatistics(selectedBirthDate, new Date());
+					}
+				}, 1000);
+			});
+
+			downloadButton?.addEventListener("click", () => {
+				if (!selectedResults) return;
+				downloadAgeCard(selectedResults);
+			});
+
+			copyButton?.addEventListener("click", async () => {
+				if (!selectedResults) return;
+
+				const summary = createResultSummary(selectedResults);
+				const buttonText = document.querySelector("#copy-button-text");
+
+				try {
+					await navigator.clipboard.writeText(summary);
+
+					if (buttonText) {
+						buttonText.textContent = "Copied!";
+					}
+
+					window.setTimeout(() => {
+						if (buttonText) {
+							buttonText.textContent = "Copy results";
+						}
+					}, 1800);
+				} catch {
+					if (buttonText) {
+						buttonText.textContent = "Could not copy";
+					}
+				}
+			});
+
+			calculateAgainButton?.addEventListener("click", () => {
+	form.scrollIntoView({
+		behavior: "smooth",
+		block: "center",
+	});
+});
+
+			function updateThemeButton() {
+				if (!(themeToggle instanceof HTMLButtonElement)) return;
+
+				const isDark =
+					document.documentElement.dataset.theme === "dark";
+
+				themeToggle.setAttribute(
+					"aria-label",
+					isDark ? "Switch to light mode" : "Switch to dark mode",
+				);
+			}
+
+			function createLocalDate(dateString) {
+				const [year, month, day] = dateString.split("-").map(Number);
+
+				return new Date(year, month - 1, day, 0, 0, 0, 0);
+			}
+
+			function formatDateForInput(date) {
+				const year = date.getFullYear();
+				const month = String(date.getMonth() + 1).padStart(2, "0");
+				const day = String(date.getDate()).padStart(2, "0");
+
+				return `${year}-${month}-${day}`;
+			}
+
+			function calculateExactAge(birthDate, currentDate) {
+				let years = currentDate.getFullYear() - birthDate.getFullYear();
+				let months = currentDate.getMonth() - birthDate.getMonth();
+				let days = currentDate.getDate() - birthDate.getDate();
+
+				if (days < 0) {
+					months -= 1;
+
+					const previousMonth = new Date(
+						currentDate.getFullYear(),
+						currentDate.getMonth(),
+						0,
+					);
+
+					days += previousMonth.getDate();
+				}
+
+				if (months < 0) {
+					years -= 1;
+					months += 12;
+				}
+
+				return {
+					years,
+					months,
+					days,
+				};
+			}
+
+			function getNextBirthday(birthDate, currentDate) {
+				const currentYear = currentDate.getFullYear();
+
+				let nextBirthday = createBirthdayDate(
+					currentYear,
+					birthDate.getMonth(),
+					birthDate.getDate(),
+				);
+
+				if (startOfDay(nextBirthday) < startOfDay(currentDate)) {
+					nextBirthday = createBirthdayDate(
+						currentYear + 1,
+						birthDate.getMonth(),
+						birthDate.getDate(),
+					);
+				}
+
+				const dayMilliseconds = 86_400_000;
+
+				const daysUntil = Math.round(
+					(startOfDay(nextBirthday).getTime() -
+						startOfDay(currentDate).getTime()) /
+						dayMilliseconds,
+				);
+
+				return {
+					date: nextBirthday,
+					daysUntil,
+				};
+			}
+
+			function createBirthdayDate(year, month, day) {
+				if (month === 1 && day === 29 && !isLeapYear(year)) {
+					return new Date(year, 1, 28);
+				}
+
+				return new Date(year, month, day);
+			}
+
+			function isLeapYear(year) {
+				return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+			}
+
+			function startOfDay(date) {
+				return new Date(
+					date.getFullYear(),
+					date.getMonth(),
+					date.getDate(),
+				);
+			}
+
+			function updateResults(birthDate, currentDate) {
+				const exactAge = calculateExactAge(birthDate, currentDate);
+				const nextBirthday = getNextBirthday(birthDate, currentDate);
+
+				animateNumber("#age-years", exactAge.years);
+				animateNumber("#age-months", exactAge.months);
+				animateNumber("#age-days", exactAge.days);
+
+				const introduction = document.querySelector(
+					"#result-introduction",
+				);
+
+				if (introduction) {
+					introduction.textContent = `Born ${formatFullDate(
+						birthDate,
+					)}, you are currently ${exactAge.years} years, ${
+						exactAge.months
+					} months and ${exactAge.days} days old.`;
+				}
+
+				let nextBirthdayMessage = `${formatNumber(
+					nextBirthday.daysUntil,
+				)} days`;
+
+				if (nextBirthday.daysUntil === 0) {
+					nextBirthdayMessage = "Today — Happy birthday!";
+				}
+
+				if (nextBirthday.daysUntil === 1) {
+					nextBirthdayMessage = "Tomorrow";
+				}
+
+				setText("#next-birthday", nextBirthdayMessage);
+				setText(
+					"#next-birthday-date",
+					formatFullDate(nextBirthday.date),
+				);
+
+				setText(
+					"#birth-weekday",
+					birthDate.toLocaleDateString("en-US", {
+						weekday: "long",
+					}),
+				);
+
+				setText(
+					"#formatted-birth-date",
+					formatFullDate(birthDate),
+				);
+
+				const livedMilliseconds =
+					currentDate.getTime() - birthDate.getTime();
+
+				const totalDays = Math.floor(
+					livedMilliseconds / 86_400_000,
+				);
+
+				const moonCycles = Math.floor(totalDays / 29.53059);
+
+				setText("#earth-orbits", formatNumber(exactAge.years));
+				setText("#moon-cycles", formatNumber(moonCycles));
+
+				const hijriBirth = getCalendarDateParts(
+	birthDate,
+	"islamic",
+);
+
+const hijriCurrentDate = formatCalendarDate(
+	currentDate,
+	"islamic",
+);
+
+const persianBirth = getCalendarDateParts(
+	birthDate,
+	"persian",
+);
+
+const persianCurrentDate = formatCalendarDate(
+	currentDate,
+	"persian",
+);
+
+setText("#hijri-day", hijriBirth.day);
+setText("#hijri-month", hijriBirth.month);
+setText("#hijri-year", `${hijriBirth.year} AH`);
+setText("#hijri-birth-date", hijriBirth.formatted);
+setText("#hijri-current-date", hijriCurrentDate);
+
+setText("#persian-day", persianBirth.day);
+setText("#persian-month", persianBirth.month);
+setText("#persian-year", `${persianBirth.year} SH`);
+setText("#persian-birth-date", persianBirth.formatted);
+setText("#persian-current-date", persianCurrentDate);
+
+				const zodiac = getChineseZodiac(birthDate);
+
+				setText("#zodiac-animal", zodiac.animal);
+				setText(
+					"#zodiac-element",
+					`${zodiac.element} element`,
+				);
+
+				setText(
+					"#zodiac-description",
+					zodiacDescriptions[zodiac.animal] ??
+						"A distinctive sign in the traditional Chinese zodiac.",
+				);
+
+				updateLiveStatistics(birthDate, currentDate);
+				renderTechnologyTimeline(birthDate.getFullYear());
+
+				return {
+					birthDate,
+					exactAge,
+					nextBirthday,
+					hijriBirthDate: hijriBirth.formatted,
+persianBirthDate: persianBirth.formatted,
+					zodiac,
+				};
+			}
+function getCalendarDateParts(date, calendar) {
+	try {
+		const formatter = new Intl.DateTimeFormat(
+			`en-US-u-ca-${calendar}-nu-latn`,
+			{
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+			},
+		);
+
+		const parts = formatter.formatToParts(date);
+
+		const day =
+			parts.find((part) => part.type === "day")?.value ?? "—";
+
+		const month =
+			parts.find((part) => part.type === "month")?.value ?? "—";
+
+		const year =
+			parts.find(
+				(part) =>
+					part.type === "year" ||
+					part.type === "relatedYear",
+			)?.value ?? "—";
+
+		return {
+			day,
+			month,
+			year,
+			formatted: formatter.format(date),
+		};
+	} catch {
+		return {
+			day: "—",
+			month: "Calendar unavailable",
+			year: "—",
+			formatted: "Not supported by this browser",
+		};
+	}
+}
+			function formatCalendarDate(date, calendar) {
+				try {
+					return new Intl.DateTimeFormat(
+						`en-US-u-ca-${calendar}-nu-latn`,
+						{
+							day: "numeric",
+							month: "long",
+							year: "numeric",
+						},
+					).format(date);
+				} catch {
+					return "Not supported by this browser";
+				}
+			}
+
+			function getChineseCalendarYear(date) {
+				try {
+					const parts = new Intl.DateTimeFormat(
+						"en-US-u-ca-chinese",
+						{
+							year: "numeric",
+						},
+					).formatToParts(date);
+
+					const relatedYear = parts.find(
+						(part) => part.type === "relatedYear",
+					);
+
+					if (relatedYear) {
+						return Number(relatedYear.value);
+					}
+				} catch {
+					return date.getFullYear();
+				}
+
+				return date.getFullYear();
+			}
+
+			function getChineseZodiac(date) {
+				const zodiacYear = getChineseCalendarYear(date);
+				const animalIndex = positiveModulo(zodiacYear - 4, 12);
+
+				const stemIndex = positiveModulo(zodiacYear - 4, 10);
+
+				const elements = [
+					"Wood",
+					"Wood",
+					"Fire",
+					"Fire",
+					"Earth",
+					"Earth",
+					"Metal",
+					"Metal",
+					"Water",
+					"Water",
+				];
+
+				return {
+					animal: zodiacAnimals[animalIndex],
+					element: elements[stemIndex],
+					year: zodiacYear,
+				};
+			}
+
+			function positiveModulo(value, divisor) {
+				return ((value % divisor) + divisor) % divisor;
+			}
+
+			function updateLiveStatistics(birthDate, currentDate) {
+				const livedMilliseconds = Math.max(
+					0,
+					currentDate.getTime() - birthDate.getTime(),
+				);
+
+				const totalSeconds = Math.floor(livedMilliseconds / 1000);
+				const totalMinutes = Math.floor(totalSeconds / 60);
+				const totalHours = Math.floor(totalMinutes / 60);
+				const totalDays = Math.floor(totalHours / 24);
+				const totalWeeks = Math.floor(totalDays / 7);
+				const totalMonths = Math.floor(totalDays / 30.436875);
+
+				const exactAge = calculateExactAge(birthDate, currentDate);
+
+				const estimatedHeartbeats = totalMinutes * 72;
+				const estimatedBreaths = totalMinutes * 16;
+				const estimatedSleepHours = Math.floor(totalHours / 3);
+
+				setText("#total-months", formatNumber(totalMonths));
+				setText("#total-weeks", formatNumber(totalWeeks));
+				setText("#total-days", formatNumber(totalDays));
+				setText("#total-hours", formatNumber(totalHours));
+				setText("#total-minutes", formatNumber(totalMinutes));
+				setText("#total-seconds", formatNumber(totalSeconds));
+
+				setText(
+					"#estimated-heartbeats",
+					formatCompactNumber(estimatedHeartbeats),
+				);
+
+				setText(
+					"#estimated-breaths",
+					formatCompactNumber(estimatedBreaths),
+				);
+
+				setText(
+					"#estimated-sleep",
+					formatNumber(estimatedSleepHours),
+				);
+
+				setText(
+					"#birthdays-completed",
+					formatNumber(exactAge.years),
+				);
+			}
+
+			function renderTechnologyTimeline(birthYear) {
+				const timeline = document.querySelector("#timeline-list");
+
+				if (!timeline) return;
+
+				const relevantMilestones = technologyMilestones.filter(
+					(item) => item.year >= birthYear,
+				);
+
+				if (relevantMilestones.length === 0) {
+					timeline.innerHTML = `
+						<div class="empty-timeline">
+							<p>No listed milestones occurred after this birth year yet.</p>
+						</div>
+					`;
+
+					return;
+				}
+
+				timeline.innerHTML = relevantMilestones
+					.slice(0, 6)
+					.map(
+						(item) => `
+							<article class="timeline-item">
+								<div class="timeline-year">${item.year}</div>
+
+								<div>
+									<h4>${item.title}</h4>
+									<p>${item.description}</p>
+								</div>
+							</article>
+						`,
+					)
+					.join("");
+			}
+
+			function animateNumber(selector, target) {
+				const element = document.querySelector(selector);
+
+				if (!element) return;
+
+				const duration = 600;
+				const startTime = performance.now();
+
+				function step(currentTime) {
+					const progress = Math.min(
+						(currentTime - startTime) / duration,
+						1,
+					);
+
+					const easedProgress =
+						1 - Math.pow(1 - progress, 3);
+
+					const currentValue = Math.round(
+						target * easedProgress,
+					);
+
+					element.textContent = formatNumber(currentValue);
+
+					if (progress < 1) {
+						requestAnimationFrame(step);
+					}
+				}
+
+				requestAnimationFrame(step);
+			}
+
+			function createResultSummary(results) {
+				return [
+					"Universal Age Calculator",
+					"",
+					`Birth date: ${formatFullDate(results.birthDate)}`,
+					`Exact age: ${results.exactAge.years} years, ${results.exactAge.months} months and ${results.exactAge.days} days`,
+					`Next birthday: ${formatFullDate(results.nextBirthday.date)} (${results.nextBirthday.daysUntil} days)`,
+					`Hijri birth date: ${results.hijriBirthDate}`,
+					`Persian birth date: ${results.persianBirthDate}`,
+					`Chinese zodiac: ${results.zodiac.element} ${results.zodiac.animal}`,
+				].join("\n");
+			}
+
+			function downloadAgeCard(results) {
+				const canvas = document.createElement("canvas");
+				const context = canvas.getContext("2d");
+
+				if (!context) return;
+
+				canvas.width = 1200;
+				canvas.height = 1200;
+
+				const gradient = context.createLinearGradient(
+					0,
+					0,
+					1200,
+					1200,
+				);
+
+				gradient.addColorStop(0, "#27214f");
+				gradient.addColorStop(0.5, "#5545d9");
+				gradient.addColorStop(1, "#7c5ce7");
+
+				context.fillStyle = gradient;
+				context.fillRect(0, 0, canvas.width, canvas.height);
+
+				context.fillStyle = "rgba(255, 255, 255, 0.08)";
+				context.beginPath();
+				context.arc(1050, 120, 340, 0, Math.PI * 2);
+				context.fill();
+
+				context.beginPath();
+				context.arc(120, 1050, 300, 0, Math.PI * 2);
+				context.fill();
+
+				context.textAlign = "center";
+				context.fillStyle = "rgba(255, 255, 255, 0.78)";
+				context.font =
+					"700 30px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					"UNIVERSAL AGE CALCULATOR",
+					600,
+					120,
+				);
+
+				context.fillStyle = "#ffffff";
+				context.font =
+					"800 72px Arial, Helvetica, sans-serif";
+
+				context.fillText("My exact age is", 600, 240);
+
+				context.font =
+					"900 190px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					String(results.exactAge.years),
+					600,
+					470,
+				);
+
+				context.font =
+					"800 46px Arial, Helvetica, sans-serif";
+
+				context.fillText("YEARS", 600, 535);
+
+				context.font =
+					"700 54px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					`${results.exactAge.months} months and ${results.exactAge.days} days`,
+					600,
+					650,
+				);
+
+				context.fillStyle = "rgba(255, 255, 255, 0.84)";
+				context.font =
+					"500 34px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					`Born ${formatFullDate(results.birthDate)}`,
+					600,
+					750,
+				);
+
+				context.fillText(
+					`Next birthday in ${results.nextBirthday.daysUntil} days`,
+					600,
+					815,
+				);
+
+				context.fillStyle = "rgba(255, 255, 255, 0.14)";
+				roundRect(context, 150, 880, 900, 150, 28);
+				context.fill();
+
+				context.fillStyle = "#ffffff";
+				context.font =
+					"700 31px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					`${results.zodiac.element} ${results.zodiac.animal} · ${results.hijriBirthDate}`,
+					600,
+					960,
+				);
+
+				context.fillStyle = "rgba(255, 255, 255, 0.65)";
+				context.font =
+					"500 24px Arial, Helvetica, sans-serif";
+
+				context.fillText(
+					"Created with Universal Age Calculator",
+					600,
+					1120,
+				);
+
+				const downloadLink = document.createElement("a");
+
+				downloadLink.download = "my-age-card.png";
+				downloadLink.href = canvas.toDataURL("image/png");
+				downloadLink.click();
+			}
+
+			function roundRect(
+				context,
+				x,
+				y,
+				width,
+				height,
+				radius,
+			) {
+				context.beginPath();
+				context.roundRect(x, y, width, height, radius);
+			}
+
+			function formatFullDate(date) {
+				return date.toLocaleDateString("en-US", {
+					day: "numeric",
+					month: "long",
+					year: "numeric",
+				});
+			}
+
+			function formatNumber(value) {
+				return new Intl.NumberFormat("en-US").format(value);
+			}
+
+			function formatCompactNumber(value) {
+				return new Intl.NumberFormat("en-US", {
+					notation: "compact",
+					maximumFractionDigits: 2,
+				}).format(value);
+			}
+
+			function setText(selector, value) {
+				const element = document.querySelector(selector);
+
+				if (element) {
+					element.textContent = value;
+				}
+			}
+		</script>
+	</body>
+</html>
+
+<style>
+	:root {
+		color-scheme: light;
+
+		--background: #f7f8fc;
+		--background-soft: rgba(255, 255, 255, 0.56);
+		--surface: #ffffff;
+		--surface-soft: #f6f7fb;
+		--surface-raised: rgba(255, 255, 255, 0.9);
+		--text: #182230;
+		--text-soft: #667085;
+		--text-faint: #8791a3;
+		--border: rgba(24, 34, 48, 0.09);
+		--border-strong: #d0d5dd;
+		--primary: #6657ff;
+		--primary-dark: #5545d9;
+		--primary-soft: #f0efff;
+		--primary-text: #5548c6;
+		--success: #0c8a61;
+		--success-soft: #e9fbf4;
+		--danger: #c0392b;
+		--header-background: rgba(255, 255, 255, 0.78);
+		--shadow:
+			0 24px 65px rgba(52, 64, 84, 0.1),
+			0 4px 12px rgba(52, 64, 84, 0.04);
+
+		font-family:
+			Inter, ui-sans-serif, system-ui, -apple-system,
+			BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+		color: var(--text);
+		background: var(--background);
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+	}
+
+	:root[data-theme="dark"] {
+		color-scheme: dark;
+
+		--background: #0d1018;
+		--background-soft: rgba(18, 22, 33, 0.74);
+		--surface: #161b27;
+		--surface-soft: #1d2331;
+		--surface-raised: rgba(22, 27, 39, 0.94);
+		--text: #f4f6fb;
+		--text-soft: #b1b8c7;
+		--text-faint: #8992a5;
+		--border: rgba(255, 255, 255, 0.09);
+		--border-strong: #394152;
+		--primary: #877aff;
+		--primary-dark: #6657ff;
+		--primary-soft: rgba(116, 101, 255, 0.15);
+		--primary-text: #b6aeff;
+		--success: #5ee0ad;
+		--success-soft: rgba(16, 185, 129, 0.12);
+		--danger: #ff8a7f;
+		--header-background: rgba(13, 16, 24, 0.8);
+		--shadow:
+			0 26px 70px rgba(0, 0, 0, 0.28),
+			0 4px 12px rgba(0, 0, 0, 0.18);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		min-width: 320px;
+		margin: 0;
+		overflow-x: hidden;
+		background:
+			radial-gradient(
+				circle at 12% 12%,
+				rgba(102, 87, 255, 0.1),
+				transparent 27rem
+			),
+			radial-gradient(
+				circle at 88% 18%,
+				rgba(20, 184, 166, 0.07),
+				transparent 25rem
+			),
+			var(--background);
+		transition:
+			background-color 200ms ease,
+			color 200ms ease;
+	}
+
+	button,
+	input {
+		font: inherit;
+	}
+
+	button {
+		cursor: pointer;
+	}
+
+	svg {
+		display: block;
+		width: 1em;
+		height: 1em;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.container {
+		width: min(1120px, calc(100% - 40px));
+		margin-inline: auto;
+	}
+
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--border);
+		background: var(--header-background);
+		backdrop-filter: blur(18px);
+	}
+
+	.header-inner {
+		display: flex;
+		min-height: 76px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.brand-icon {
+		display: grid;
+		width: 42px;
+		height: 42px;
+		place-items: center;
+		border-radius: 14px;
+		color: white;
+		background: linear-gradient(135deg, #6657ff, #8b5cf6);
+		box-shadow: 0 12px 26px rgba(102, 87, 255, 0.25);
+	}
+
+	.brand-icon svg {
+		width: 21px;
+		height: 21px;
+		fill: currentColor;
+		stroke: none;
+	}
+
+	.brand-copy strong,
+	.brand-copy small {
+		display: block;
+	}
+
+	.brand-copy strong {
+		font-size: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.brand-copy small {
+		margin-top: 1px;
+		color: var(--text-soft);
+		font-size: 0.75rem;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.header-badge {
+		padding: 8px 12px;
+		border: 1px solid var(--border-strong);
+		border-radius: 999px;
+		color: var(--text-soft);
+		background: var(--surface-raised);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.theme-toggle {
+		display: grid;
+		width: 40px;
+		height: 40px;
+		place-items: center;
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		color: var(--text);
+		background: var(--surface-raised);
+		transition:
+			transform 160ms ease,
+			border-color 160ms ease;
+	}
+
+	.theme-toggle:hover {
+		transform: translateY(-2px);
+		border-color: var(--primary);
+	}
+
+	.theme-toggle svg {
+		width: 19px;
+		height: 19px;
+	}
+
+	.moon-icon {
+		display: none;
+	}
+
+	:root[data-theme="dark"] .sun-icon {
+		display: none;
+	}
+
+	:root[data-theme="dark"] .moon-icon {
+		display: block;
+	}
+
+	.hero {
+		padding: 86px 0 78px;
+	}
+
+	.hero-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.78fr);
+		align-items: center;
+		gap: 72px;
+	}
+
+	.eyebrow,
+	.card-label {
+		margin: 0 0 12px;
+		color: var(--primary-text);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	p {
+		margin-top: 0;
+	}
+
+	h1 {
+		max-width: 760px;
+		margin-bottom: 22px;
+		font-size: clamp(3rem, 6vw, 5.75rem);
+		line-height: 0.98;
+		letter-spacing: -0.065em;
+	}
+
+	.hero-description {
+		max-width: 660px;
+		margin-bottom: 28px;
+		color: var(--text-soft);
+		font-size: clamp(1rem, 1.8vw, 1.18rem);
+		line-height: 1.75;
+	}
+
+	.feature-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.feature-row span {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 9px 13px;
+		border: 1px solid rgba(102, 87, 255, 0.16);
+		border-radius: 999px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	.feature-row svg {
+		width: 15px;
+		height: 15px;
+		stroke-width: 2.5;
+	}
+
+	.calculator-card {
+		padding: 30px;
+		border: 1px solid var(--border);
+		border-radius: 28px;
+		background: var(--surface-raised);
+		box-shadow: var(--shadow);
+	}
+
+	.calculator-heading,
+	.statistics-heading,
+	.panel-heading {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.calculator-heading {
+		margin-bottom: 28px;
+	}
+
+	.calculator-heading h2 {
+		margin-bottom: 0;
+		font-size: 1.55rem;
+		letter-spacing: -0.04em;
+	}
+
+	.card-icon {
+		display: grid;
+		flex: 0 0 auto;
+		width: 50px;
+		height: 50px;
+		place-items: center;
+		border-radius: 16px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.card-icon svg {
+		width: 23px;
+		height: 23px;
+	}
+
+	form label {
+		display: block;
+		margin-bottom: 9px;
+		color: var(--text);
+		font-size: 0.88rem;
+		font-weight: 750;
+	}
+
+	form input {
+		width: 100%;
+		min-height: 56px;
+		padding: 0 16px;
+		border: 1px solid var(--border-strong);
+		border-radius: 14px;
+		outline: none;
+		color: var(--text);
+		background: var(--surface);
+		transition:
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	form input:focus {
+		border-color: var(--primary);
+		box-shadow: 0 0 0 4px rgba(102, 87, 255, 0.14);
+	}
+
+	.form-error {
+		min-height: 21px;
+		margin: 8px 0 4px;
+		color: var(--danger);
+		font-size: 0.82rem;
+	}
+
+	form button {
+		display: flex;
+		width: 100%;
+		min-height: 56px;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 19px;
+		border: 0;
+		border-radius: 14px;
+		color: white;
+		background: linear-gradient(
+			135deg,
+			var(--primary),
+			#7c5ce7
+		);
+		box-shadow: 0 14px 28px rgba(102, 87, 255, 0.24);
+		font-weight: 800;
+		transition:
+			transform 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	form button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 18px 34px rgba(102, 87, 255, 0.3);
+	}
+
+	form button svg {
+		width: 20px;
+		height: 20px;
+		stroke-width: 2.3;
+	}
+
+	.privacy-note {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7px;
+		margin: 16px 0 0;
+		color: var(--text-faint);
+		font-size: 0.76rem;
+		line-height: 1.5;
+		text-align: center;
+	}
+
+	.privacy-note svg {
+		flex: 0 0 auto;
+		width: 14px;
+		height: 14px;
+	}
+
+	.results-section {
+		scroll-margin-top: 76px;
+		padding: 82px 0;
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+		background: var(--background-soft);
+	}
+
+	.results-section[hidden] {
+		display: none;
+	}
+
+	.section-heading {
+		max-width: 690px;
+		margin-bottom: 36px;
+	}
+
+	.section-heading h2,
+	.information-section h2,
+	.faq-section h2 {
+		margin-bottom: 14px;
+		font-size: clamp(2rem, 4vw, 3.2rem);
+		line-height: 1.08;
+		letter-spacing: -0.05em;
+	}
+
+	.section-heading > p:last-child,
+	.information-copy p,
+	.panel-heading > p {
+		color: var(--text-soft);
+		line-height: 1.75;
+	}
+
+	.age-highlight {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr auto 1fr;
+		align-items: center;
+		margin-bottom: 24px;
+		padding: 38px;
+		border-radius: 26px;
+		color: white;
+		background:
+			linear-gradient(
+				130deg,
+				rgba(255, 255, 255, 0.08),
+				transparent 55%
+			),
+			linear-gradient(135deg, #302b63, #5d4fe0 58%, #7659dd);
+		box-shadow: 0 24px 55px rgba(69, 57, 173, 0.23);
+	}
+
+	.age-unit {
+		text-align: center;
+	}
+
+	.age-unit strong,
+	.age-unit span {
+		display: block;
+	}
+
+	.age-unit strong {
+		font-size: clamp(2.75rem, 6vw, 5rem);
+		line-height: 1;
+		letter-spacing: -0.06em;
+	}
+
+	.age-unit span {
+		margin-top: 9px;
+		color: rgba(255, 255, 255, 0.76);
+		font-size: 0.82rem;
+		font-weight: 750;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+	}
+
+	.age-divider {
+		width: 1px;
+		height: 76px;
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	.result-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.result-card,
+	.statistics-panel,
+	.world-calendar-panel,
+	.fun-statistics-panel,
+	.milestones-panel {
+		border: 1px solid var(--border);
+		background: var(--surface);
+		box-shadow: var(--shadow);
+	}
+
+	.result-card {
+		min-height: 218px;
+		padding: 24px;
+		border-radius: 20px;
+	}
+
+	.result-icon {
+		display: grid;
+		width: 46px;
+		height: 46px;
+		margin-bottom: 24px;
+		place-items: center;
+		border-radius: 14px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.result-icon svg {
+		width: 21px;
+		height: 21px;
+	}
+
+	.result-card p {
+		margin-bottom: 7px;
+		color: var(--text-faint);
+		font-size: 0.81rem;
+		font-weight: 750;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.result-card strong,
+	.result-card span {
+		display: block;
+	}
+
+	.result-card strong {
+		margin-bottom: 7px;
+		font-size: 1.25rem;
+		letter-spacing: -0.035em;
+	}
+
+	.result-card span {
+		color: var(--text-faint);
+		font-size: 0.8rem;
+		line-height: 1.45;
+	}
+
+	.world-calendar-panel,
+	.statistics-panel,
+	.fun-statistics-panel,
+	.milestones-panel {
+		margin-top: 24px;
+		padding: 30px;
+		border-radius: 24px;
+	}
+
+	.panel-heading {
+		align-items: flex-end;
+		margin-bottom: 26px;
+	}
+
+	.panel-heading > div {
+		flex: 1;
+	}
+
+	.panel-heading > p {
+		max-width: 430px;
+		margin: 0;
+		font-size: 0.86rem;
+	}
+
+	.panel-heading h3,
+	.statistics-heading h3 {
+		margin-bottom: 0;
+		font-size: 1.55rem;
+		letter-spacing: -0.04em;
+	}
+
+	.calendar-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.calendar-card {
+		min-height: 285px;
+		padding: 23px;
+		border: 1px solid var(--border);
+		border-radius: 20px;
+		background: var(--surface-soft);
+	}
+
+	.calendar-card-top {
+		display: flex;
+		align-items: center;
+		gap: 11px;
+		margin-bottom: 26px;
+		color: var(--text-soft);
+		font-size: 0.8rem;
+		font-weight: 750;
+	}
+
+	.calendar-symbol {
+		display: grid;
+		width: 42px;
+		height: 42px;
+		place-items: center;
+		border-radius: 13px;
+	}
+
+	.calendar-symbol svg {
+		width: 21px;
+		height: 21px;
+	}
+
+	.hijri-card .calendar-symbol {
+		color: #14835f;
+		background: rgba(16, 185, 129, 0.12);
+	}
+
+	.persian-card .calendar-symbol {
+		color: #d9821f;
+		background: rgba(245, 158, 11, 0.13);
+	}
+
+	.zodiac-card .calendar-symbol {
+		color: #c64848;
+		background: rgba(239, 68, 68, 0.12);
+	}
+
+	.calendar-name {
+		margin-bottom: 8px;
+		color: var(--text-faint);
+		font-size: 0.76rem;
+		font-weight: 750;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.calendar-card > strong {
+		display: block;
+		min-height: 62px;
+		font-size: 1.3rem;
+		line-height: 1.35;
+		letter-spacing: -0.035em;
+	}
+
+		.calendar-date-display {
+		display: flex;
+		min-height: 82px;
+		align-items: center;
+		gap: 15px;
+	}
+
+	.calendar-date-display > strong {
+		flex: 0 0 auto;
+		font-size: clamp(2.8rem, 5vw, 4rem);
+		line-height: 0.9;
+		letter-spacing: -0.07em;
+	}
+
+	.calendar-date-display > div {
+		min-width: 0;
+	}
+
+	.calendar-date-display span,
+	.calendar-date-display b {
+		display: block;
+	}
+
+	.calendar-date-display span {
+		margin-bottom: 5px;
+		overflow-wrap: anywhere;
+		font-size: 1.08rem;
+		font-weight: 800;
+		letter-spacing: -0.025em;
+	}
+
+	.calendar-date-display b {
+		color: var(--text-faint);
+		font-size: 0.78rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.accessible-calendar-date {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0 !important;
+		margin: -1px !important;
+		overflow: hidden !important;
+		clip: rect(0, 0, 0, 0) !important;
+		white-space: nowrap !important;
+		border: 0 !important;
+	}
+	
+	.calendar-detail {
+		margin-top: 20px;
+		padding-top: 17px;
+		border-top: 1px solid var(--border);
+	}
+
+	.calendar-detail span,
+	.calendar-detail b {
+		display: block;
+	}
+
+	.calendar-detail span {
+		margin-bottom: 5px;
+		color: var(--text-faint);
+		font-size: 0.75rem;
+	}
+
+	.calendar-detail b {
+		font-size: 0.85rem;
+		line-height: 1.45;
+	}
+
+	.zodiac-result {
+		display: flex;
+		align-items: baseline;
+		gap: 9px;
+	}
+
+	.zodiac-result strong {
+		font-size: 1.55rem;
+		letter-spacing: -0.04em;
+	}
+
+	.zodiac-result span {
+		color: var(--primary-text);
+		font-size: 0.8rem;
+		font-weight: 750;
+	}
+
+	.zodiac-description {
+		margin: 20px 0 0;
+		padding-top: 17px;
+		border-top: 1px solid var(--border);
+		color: var(--text-soft);
+		font-size: 0.84rem;
+		line-height: 1.6;
+	}
+
+	.statistics-heading {
+		align-items: center;
+		margin-bottom: 26px;
+	}
+
+	.live-indicator {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 7px 10px;
+		border-radius: 999px;
+		color: var(--success);
+		background: var(--success-soft);
+		font-size: 0.75rem;
+		font-weight: 800;
+	}
+
+	.live-indicator > span {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: #10b981;
+		box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.13);
+		animation: pulse 1.7s infinite;
+	}
+
+	.statistics-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.statistic {
+		padding: 18px;
+		border-radius: 15px;
+		background: var(--surface-soft);
+	}
+
+	.statistic span,
+	.statistic strong {
+		display: block;
+	}
+
+	.statistic span {
+		margin-bottom: 8px;
+		color: var(--text-faint);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.statistic strong {
+		overflow-wrap: anywhere;
+		font-size: clamp(1.08rem, 2vw, 1.4rem);
+		letter-spacing: -0.03em;
+	}
+
+	.fun-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.fun-card {
+		display: flex;
+		align-items: center;
+		gap: 17px;
+		min-height: 116px;
+		padding: 20px;
+		border-radius: 18px;
+		background: var(--surface-soft);
+	}
+
+	.fun-icon {
+		display: grid;
+		flex: 0 0 auto;
+		width: 50px;
+		height: 50px;
+		place-items: center;
+		border-radius: 15px;
+	}
+
+	.fun-icon svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	.heartbeat-icon {
+		color: #d94d64;
+		background: rgba(239, 68, 68, 0.12);
+	}
+
+	.breath-icon {
+		color: #2486bd;
+		background: rgba(14, 165, 233, 0.12);
+	}
+
+	.sleep-icon {
+		color: #6657d7;
+		background: rgba(102, 87, 255, 0.12);
+	}
+
+	.birthday-icon {
+		color: #d9821f;
+		background: rgba(245, 158, 11, 0.13);
+	}
+
+	.fun-card span,
+	.fun-card strong {
+		display: block;
+	}
+
+	.fun-card span {
+		margin-bottom: 7px;
+		color: var(--text-faint);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.fun-card strong {
+		font-size: 1.25rem;
+		letter-spacing: -0.035em;
+	}
+
+	.timeline-list {
+		display: grid;
+		gap: 12px;
+	}
+
+	.timeline-item {
+		display: grid;
+		grid-template-columns: 90px 1fr;
+		gap: 22px;
+		padding: 20px;
+		border-radius: 17px;
+		background: var(--surface-soft);
+	}
+
+	.timeline-year {
+		display: grid;
+		height: 46px;
+		place-items: center;
+		border-radius: 13px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-weight: 850;
+	}
+
+	.timeline-item h4 {
+		margin-bottom: 6px;
+		font-size: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.timeline-item p {
+		margin-bottom: 0;
+		color: var(--text-soft);
+		font-size: 0.84rem;
+		line-height: 1.6;
+	}
+
+	.empty-timeline {
+		padding: 25px;
+		border-radius: 17px;
+		color: var(--text-soft);
+		background: var(--surface-soft);
+		text-align: center;
+	}
+
+	.empty-timeline p {
+		margin: 0;
+	}
+
+	.result-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+		margin-top: 30px;
+	}
+
+	.result-actions button {
+		display: inline-flex;
+		min-height: 50px;
+		align-items: center;
+		justify-content: center;
+		gap: 9px;
+		padding: 0 18px;
+		border-radius: 13px;
+		font-weight: 800;
+		transition:
+			transform 160ms ease,
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	.result-actions button:hover {
+		transform: translateY(-2px);
+	}
+
+	.result-actions svg {
+		width: 19px;
+		height: 19px;
+	}
+
+	.primary-action {
+		border: 0;
+		color: white;
+		background: linear-gradient(
+			135deg,
+			var(--primary),
+			#7c5ce7
+		);
+		box-shadow: 0 12px 26px rgba(102, 87, 255, 0.22);
+	}
+
+	.secondary-action {
+		border: 1px solid var(--border-strong);
+		color: var(--text);
+		background: var(--surface);
+	}
+
+	.secondary-action:hover {
+		border-color: var(--primary);
+	}
+
+	.information-section {
+		padding: 82px 0;
+	}
+
+	.information-grid {
+		display: grid;
+		grid-template-columns: 0.8fr 1.2fr;
+		gap: 80px;
+	}
+
+	.information-copy p:last-child {
+		margin-bottom: 0;
+	}
+
+	.faq-section {
+		padding: 82px 0;
+		border-top: 1px solid var(--border);
+		background: var(--background-soft);
+	}
+
+	.faq-heading {
+		margin-bottom: 30px;
+	}
+
+	.faq-list {
+		display: grid;
+		max-width: 850px;
+		gap: 12px;
+	}
+
+	.faq-list details {
+		border: 1px solid var(--border);
+		border-radius: 17px;
+		background: var(--surface);
+	}
+
+	.faq-list summary {
+		position: relative;
+		padding: 20px 52px 20px 22px;
+		cursor: pointer;
+		font-weight: 800;
+		list-style: none;
+	}
+
+	.faq-list summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-list summary::after {
+		position: absolute;
+		top: 50%;
+		right: 22px;
+		content: "+";
+		color: var(--primary);
+		font-size: 1.4rem;
+		transform: translateY(-50%);
+	}
+
+	.faq-list details[open] summary::after {
+		content: "−";
+	}
+
+	.faq-list details p {
+		margin: 0;
+		padding: 0 22px 22px;
+		color: var(--text-soft);
+		line-height: 1.7;
+	}
+
+	footer {
+		padding: 28px 0;
+		border-top: 1px solid var(--border);
+		background: var(--surface-raised);
+	}
+
+	.footer-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.footer-inner p {
+		margin: 0;
+		color: var(--text-faint);
+		font-size: 0.8rem;
+	}
+	/* Polished entrance animations */
+
+	.results-section:not([hidden]) .section-heading {
+		animation: reveal-up 520ms ease both;
+	}
+
+	.results-section:not([hidden]) .age-highlight {
+		animation: reveal-up 600ms 80ms ease both;
+	}
+
+	.results-section:not([hidden]) .result-card {
+		animation: reveal-up 560ms ease both;
+	}
+
+	.results-section:not([hidden]) .result-card:nth-child(1) {
+		animation-delay: 140ms;
+	}
+
+	.results-section:not([hidden]) .result-card:nth-child(2) {
+		animation-delay: 200ms;
+	}
+
+	.results-section:not([hidden]) .result-card:nth-child(3) {
+		animation-delay: 260ms;
+	}
+
+	.results-section:not([hidden]) .result-card:nth-child(4) {
+		animation-delay: 320ms;
+	}
+
+	.results-section:not([hidden]) .world-calendar-panel {
+		animation: reveal-up 620ms 220ms ease both;
+	}
+
+	.results-section:not([hidden]) .statistics-panel {
+		animation: reveal-up 620ms 280ms ease both;
+	}
+
+	.results-section:not([hidden]) .fun-statistics-panel {
+		animation: reveal-up 620ms 340ms ease both;
+	}
+
+	.results-section:not([hidden]) .milestones-panel {
+		animation: reveal-up 620ms 400ms ease both;
+	}
+
+	.results-section:not([hidden]) .result-actions {
+		animation: reveal-up 620ms 460ms ease both;
+	}
+
+	.result-card,
+	.calendar-card,
+	.fun-card,
+	.statistic,
+	.timeline-item {
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			background-color 180ms ease;
+	}
+
+	@media (hover: hover) {
+		.result-card:hover,
+		.calendar-card:hover,
+		.fun-card:hover {
+			transform: translateY(-4px);
+			border-color: rgba(102, 87, 255, 0.24);
+			box-shadow: 0 18px 38px rgba(52, 64, 84, 0.11);
+		}
+
+		.statistic:hover,
+		.timeline-item:hover {
+			transform: translateY(-2px);
+			background: var(--primary-soft);
+		}
+	}
+
+	.age-highlight {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.age-highlight::before,
+	.age-highlight::after {
+		position: absolute;
+		content: "";
+		border-radius: 50%;
+		pointer-events: none;
+	}
+
+	.age-highlight::before {
+		top: -140px;
+		right: -110px;
+		width: 330px;
+		height: 330px;
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.age-highlight::after {
+		bottom: -180px;
+		left: -120px;
+		width: 360px;
+		height: 360px;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.age-unit,
+	.age-divider {
+		position: relative;
+		z-index: 1;
+	}
+
+	.calendar-card {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.calendar-card::after {
+		position: absolute;
+		top: -60px;
+		right: -60px;
+		width: 150px;
+		height: 150px;
+		content: "";
+		border-radius: 50%;
+		opacity: 0.65;
+		pointer-events: none;
+	}
+
+	.hijri-card::after {
+		background: rgba(16, 185, 129, 0.08);
+	}
+
+	.persian-card::after {
+		background: rgba(245, 158, 11, 0.09);
+	}
+
+	.zodiac-card::after {
+		background: rgba(239, 68, 68, 0.08);
+	}
+
+	.calendar-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	button:focus-visible,
+	input:focus-visible,
+	summary:focus-visible,
+	a:focus-visible {
+		outline: 3px solid rgba(102, 87, 255, 0.42);
+		outline-offset: 3px;
+	}
+
+	@keyframes reveal-up {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		50% {
+			opacity: 0.6;
+			transform: scale(0.86);
+		}
+	}
+
+	@media (max-width: 960px) {
+		.hero-inner {
+			grid-template-columns: 1fr;
+			gap: 46px;
+		}
+
+		.hero-copy {
+			text-align: center;
+		}
+
+		.hero-description {
+			margin-inline: auto;
+		}
+
+		.feature-row {
+			justify-content: center;
+		}
+
+		.calculator-card {
+			width: min(100%, 620px);
+			margin-inline: auto;
+		}
+
+		.result-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.calendar-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.calendar-card {
+			min-height: auto;
+		}
+
+		.information-grid {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.container {
+			width: min(100% - 28px, 1120px);
+		}
+
+		.header-inner {
+			min-height: 68px;
+		}
+
+		.header-badge {
+			display: none;
+		}
+
+		.hero {
+			padding: 60px 0;
+		}
+
+		h1 {
+			font-size: clamp(2.65rem, 15vw, 4rem);
+		}
+
+		.calculator-card {
+			padding: 22px;
+			border-radius: 22px;
+		}
+
+		.results-section,
+		.information-section,
+		.faq-section {
+			padding: 62px 0;
+		}
+
+		.age-highlight {
+			padding: 28px 14px;
+			border-radius: 22px;
+		}
+
+		.age-unit strong {
+			font-size: clamp(2.2rem, 13vw, 3.35rem);
+		}
+
+		.age-divider {
+			height: 58px;
+		}
+
+		.result-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.result-card {
+			min-height: auto;
+		}
+
+		.world-calendar-panel,
+		.statistics-panel,
+		.fun-statistics-panel,
+		.milestones-panel {
+			padding: 22px;
+		}
+
+		.panel-heading {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.statistics-grid,
+		.fun-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.timeline-item {
+			grid-template-columns: 70px 1fr;
+			gap: 15px;
+		}
+
+		.result-actions {
+			align-items: stretch;
+			flex-direction: column;
+		}
+
+		.result-actions button {
+			width: 100%;
+		}
+
+		.footer-inner {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 7px;
+		}
+	}
+
+	@media (max-width: 430px) {
+		.brand-copy small {
+			display: none;
+		}
+
+		.age-highlight {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		.age-divider {
+			width: 54px;
+			height: 1px;
+			margin-inline: auto;
+		}
+
+		.timeline-item {
+			grid-template-columns: 1fr;
+		}
+
+		.timeline-year {
+			width: 82px;
+		}
+	}
+
+		@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-delay: 0ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+</style>
