@@ -1,9 +1,9 @@
 ---
 const pageTitle =
-	"Universal Age Calculator – Exact Age, Hijri Date, Persian Date & Zodiac";
+	"Universal Age Calculator – Exact Age, Hijri Date & Zodiac Signs";
 
 const pageDescription =
-	"Calculate your exact age in years, months and days. Discover your Hijri and Persian birth dates, Chinese zodiac, next birthday and lifetime statistics.";
+	"Calculate your exact age in years, months and days. Discover your Hijri birth date, Western star sign, Chinese zodiac, next birthday and lifetime statistics.";
 ---
 
 <!doctype html>
@@ -28,7 +28,7 @@ const pageDescription =
 			"Exact age calculation",
 			"Birthday countdown",
 			"Hijri calendar conversion",
-			"Persian calendar conversion",
+			"Western zodiac sign calculation",
 			"Chinese zodiac calculation",
 			"Lifetime statistics",
 			"Downloadable age card",
@@ -141,8 +141,8 @@ const pageDescription =
 
 						<p class="hero-description">
 							Find your age in years, months, weeks, days, hours and
-							seconds. Discover your next birthday, world calendar dates,
-							Chinese zodiac and fascinating lifetime statistics.
+							seconds. Discover your next birthday, Hijri birth date,
+							Western star sign, Chinese zodiac and fascinating lifetime statistics.
 						</p>
 
 						<div class="feature-row" aria-label="Calculator features">
@@ -157,7 +157,7 @@ const pageDescription =
 								<svg viewBox="0 0 24 24" aria-hidden="true">
 									<path d="m5 12 4 4L19 6"></path>
 								</svg>
-								World calendars
+								Birth traditions
 							</span>
 
 							<span>
@@ -196,6 +196,30 @@ const pageDescription =
 								required
 								autocomplete="bday"
 							/>
+
+							<label class="preference-option" for="hide-pig-reference">
+								<input
+									id="hide-pig-reference"
+									name="hidePigReference"
+									type="checkbox"
+								/>
+
+								<span class="preference-control" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="m5 12 4 4L19 6"></path>
+									</svg>
+								</span>
+
+								<span class="preference-copy">
+									<strong>Are you Muslim?</strong>
+									<small>
+										We'll present Chinese zodiac results in a culturally
+										appropriate way.
+									</small>
+								</span>
+
+								<span class="preference-glow" aria-hidden="true"></span>
+							</label>
 
 							<p id="form-error" class="form-error" role="alert"></p>
 
@@ -322,13 +346,12 @@ const pageDescription =
 					<section class="world-calendar-panel">
 						<div class="panel-heading">
 							<div>
-								<p class="card-label">World calendars</p>
-								<h3>Your birth date around the world</h3>
+								<p class="card-label">Birth traditions</p>
+								<h3>Your birth date across traditions</h3>
 							</div>
 
 							<p>
-								The same day represented through different calendar
-								traditions.
+								Explore your Hijri birth date and your Western and Chinese zodiac signs.
 							</p>
 						</div>
 
@@ -366,42 +389,25 @@ const pageDescription =
 								</div>
 							</article>
 
-							<article class="calendar-card persian-card">
+							<article class="calendar-card western-card">
 								<div class="calendar-card-top">
-									<div class="calendar-symbol" aria-hidden="true">
-										<svg viewBox="0 0 24 24">
-											<circle cx="12" cy="12" r="4"></circle>
-											<path d="M12 2v2"></path>
-											<path d="M12 20v2"></path>
-											<path d="m4.93 4.93 1.42 1.42"></path>
-											<path d="m17.66 17.66 1.41 1.41"></path>
-											<path d="M2 12h2"></path>
-											<path d="M20 12h2"></path>
-											<path d="m6.34 17.66-1.41 1.41"></path>
-											<path d="m19.07 4.93-1.41 1.41"></path>
-										</svg>
+									<div class="calendar-symbol western-symbol" aria-hidden="true">
+										<span id="western-zodiac-symbol">✦</span>
 									</div>
 
-									<span>Persian calendar</span>
+									<span>Western zodiac</span>
 								</div>
 
-								<p class="calendar-name">Solar Hijri birth date</p>
+								<p class="calendar-name">Your star sign</p>
 
-<div class="calendar-date-display">
-	<strong id="persian-day">—</strong>
-
-	<div>
-		<span id="persian-month">—</span>
-		<b id="persian-year">—</b>
-	</div>
-</div>
-
-<p id="persian-birth-date" class="accessible-calendar-date">—</p>
-
-								<div class="calendar-detail">
-									<span>Current Persian date</span>
-									<b id="persian-current-date">—</b>
+								<div class="zodiac-result western-zodiac-result">
+									<strong id="western-zodiac-sign">—</strong>
+									<span id="western-zodiac-range">—</span>
 								</div>
+
+								<p id="western-zodiac-description" class="zodiac-description">
+									—
+								</p>
 							</article>
 
 							<article class="calendar-card zodiac-card">
@@ -420,7 +426,7 @@ const pageDescription =
 									<span>Chinese zodiac</span>
 								</div>
 
-								<p class="calendar-name">Your zodiac sign</p>
+								<p id="chinese-zodiac-label" class="calendar-name">Your zodiac sign</p>
 
 								<div class="zodiac-result">
 									<strong id="zodiac-animal">—</strong>
@@ -622,8 +628,8 @@ const pageDescription =
 						</p>
 
 						<p>
-							It also converts your birth date into Islamic Hijri and
-							Persian calendar formats, estimates your Chinese zodiac, and
+							It also converts your birth date into the Islamic Hijri calendar,
+							identifies your Western star sign and Chinese zodiac, and
 							calculates how many weeks, days, hours, minutes and seconds
 							you have lived.
 						</p>
@@ -693,6 +699,7 @@ const pageDescription =
 		<script>
 			const form = document.querySelector("#age-form");
 			const birthDateInput = document.querySelector("#birth-date");
+			const hidePigReferenceInput = document.querySelector("#hide-pig-reference");
 			const formError = document.querySelector("#form-error");
 			const resultsSection = document.querySelector("#results-section");
 
@@ -735,6 +742,23 @@ const pageDescription =
 				Dog: "Loyal, honest and protective.",
 				Pig: "Generous, sincere and warm-hearted.",
 			};
+
+
+
+			const westernZodiacSigns = [
+				{ name: "Capricorn", symbol: "♑", range: "December 22 – January 19", start: [12, 22], end: [1, 19], description: "Ambitious, disciplined and practical." },
+				{ name: "Aquarius", symbol: "♒", range: "January 20 – February 18", start: [1, 20], end: [2, 18], description: "Independent, inventive and forward-thinking." },
+				{ name: "Pisces", symbol: "♓", range: "February 19 – March 20", start: [2, 19], end: [3, 20], description: "Intuitive, compassionate and imaginative." },
+				{ name: "Aries", symbol: "♈", range: "March 21 – April 19", start: [3, 21], end: [4, 19], description: "Bold, energetic and determined." },
+				{ name: "Taurus", symbol: "♉", range: "April 20 – May 20", start: [4, 20], end: [5, 20], description: "Dependable, patient and grounded." },
+				{ name: "Gemini", symbol: "♊", range: "May 21 – June 20", start: [5, 21], end: [6, 20], description: "Curious, adaptable and expressive." },
+				{ name: "Cancer", symbol: "♋", range: "June 21 – July 22", start: [6, 21], end: [7, 22], description: "Caring, intuitive and protective." },
+				{ name: "Leo", symbol: "♌", range: "July 23 – August 22", start: [7, 23], end: [8, 22], description: "Confident, generous and charismatic." },
+				{ name: "Virgo", symbol: "♍", range: "August 23 – September 22", start: [8, 23], end: [9, 22], description: "Observant, practical and thoughtful." },
+				{ name: "Libra", symbol: "♎", range: "September 23 – October 22", start: [9, 23], end: [10, 22], description: "Diplomatic, balanced and sociable." },
+				{ name: "Scorpio", symbol: "♏", range: "October 23 – November 21", start: [10, 23], end: [11, 21], description: "Passionate, perceptive and resilient." },
+				{ name: "Sagittarius", symbol: "♐", range: "November 22 – December 21", start: [11, 22], end: [12, 21], description: "Optimistic, adventurous and open-minded." },
+			];
 
 			const technologyMilestones = [
 				{
@@ -812,6 +836,7 @@ const pageDescription =
 			if (
 				!(form instanceof HTMLFormElement) ||
 				!(birthDateInput instanceof HTMLInputElement) ||
+				!(hidePigReferenceInput instanceof HTMLInputElement) ||
 				!(formError instanceof HTMLElement) ||
 				!(resultsSection instanceof HTMLElement)
 			) {
@@ -835,6 +860,13 @@ const pageDescription =
 				}
 
 				updateThemeButton();
+			});
+
+			hidePigReferenceInput.addEventListener("change", () => {
+				if (!selectedResults) return;
+
+				selectedResults.hidePigReference = hidePigReferenceInput.checked;
+				updateChineseZodiacDisplay(selectedResults.zodiac);
 			});
 
 			form.addEventListener("submit", (event) => {
@@ -1100,41 +1132,22 @@ const hijriCurrentDate = formatCalendarDate(
 	"islamic",
 );
 
-const persianBirth = getCalendarDateParts(
-	birthDate,
-	"persian",
-);
-
-const persianCurrentDate = formatCalendarDate(
-	currentDate,
-	"persian",
-);
-
 setText("#hijri-day", hijriBirth.day);
 setText("#hijri-month", hijriBirth.month);
 setText("#hijri-year", `${hijriBirth.year} AH`);
 setText("#hijri-birth-date", hijriBirth.formatted);
 setText("#hijri-current-date", hijriCurrentDate);
 
-setText("#persian-day", persianBirth.day);
-setText("#persian-month", persianBirth.month);
-setText("#persian-year", `${persianBirth.year} SH`);
-setText("#persian-birth-date", persianBirth.formatted);
-setText("#persian-current-date", persianCurrentDate);
+				const westernZodiac = getWesternZodiac(birthDate);
+
+				setText("#western-zodiac-symbol", westernZodiac.symbol);
+				setText("#western-zodiac-sign", westernZodiac.name);
+				setText("#western-zodiac-range", westernZodiac.range);
+				setText("#western-zodiac-description", westernZodiac.description);
 
 				const zodiac = getChineseZodiac(birthDate);
 
-				setText("#zodiac-animal", zodiac.animal);
-				setText(
-					"#zodiac-element",
-					`${zodiac.element} element`,
-				);
-
-				setText(
-					"#zodiac-description",
-					zodiacDescriptions[zodiac.animal] ??
-						"A distinctive sign in the traditional Chinese zodiac.",
-				);
+				updateChineseZodiacDisplay(zodiac);
 
 				updateLiveStatistics(birthDate, currentDate);
 				renderTechnologyTimeline(birthDate.getFullYear());
@@ -1144,8 +1157,9 @@ setText("#persian-current-date", persianCurrentDate);
 					exactAge,
 					nextBirthday,
 					hijriBirthDate: hijriBirth.formatted,
-persianBirthDate: persianBirth.formatted,
+					westernZodiac,
 					zodiac,
+					hidePigReference: hidePigReferenceInput.checked,
 				};
 			}
 function getCalendarDateParts(date, calendar) {
@@ -1202,6 +1216,66 @@ function getCalendarDateParts(date, calendar) {
 				} catch {
 					return "Not supported by this browser";
 				}
+			}
+
+
+			function getWesternZodiac(date) {
+				const month = date.getMonth() + 1;
+				const day = date.getDate();
+				const value = month * 100 + day;
+
+				return (
+					westernZodiacSigns.find((sign) => {
+						const start = sign.start[0] * 100 + sign.start[1];
+						const end = sign.end[0] * 100 + sign.end[1];
+
+						if (start <= end) {
+							return value >= start && value <= end;
+						}
+
+						return value >= start || value <= end;
+					}) ?? westernZodiacSigns[0]
+				);
+			}
+
+			function shouldHideChineseAnimal(zodiac) {
+				return hidePigReferenceInput.checked && zodiac.animal === "Pig";
+			}
+
+			function getChineseZodiacDisplay(zodiac, muslimFriendly = hidePigReferenceInput.checked) {
+				const hideAnimal = muslimFriendly && zodiac.animal === "Pig";
+
+				return {
+					hideAnimal,
+					title: hideAnimal ? zodiac.element : zodiac.animal,
+					element: hideAnimal ? "element" : `${zodiac.element} element`,
+					description:
+						zodiacDescriptions[zodiac.animal] ??
+						"Distinctive traits in the traditional Chinese zodiac.",
+				};
+			}
+
+			function getChineseZodiacText(zodiac, muslimFriendly = hidePigReferenceInput.checked) {
+				const display = getChineseZodiacDisplay(zodiac, muslimFriendly);
+
+				return display.hideAnimal
+					? `${display.title} ${display.element} · ${display.description}`
+					: `${display.element.replace(" element", "")} ${display.title}`;
+			}
+
+			function updateChineseZodiacDisplay(zodiac) {
+				const display = getChineseZodiacDisplay(
+					zodiac,
+					hidePigReferenceInput.checked,
+				);
+
+				setText(
+					"#chinese-zodiac-label",
+					display.hideAnimal ? "Your zodiac traits" : "Your zodiac sign",
+				);
+				setText("#zodiac-animal", display.title);
+				setText("#zodiac-element", display.element);
+				setText("#zodiac-description", display.description);
 			}
 
 			function getChineseCalendarYear(date) {
@@ -1372,6 +1446,12 @@ function getCalendarDateParts(date, calendar) {
 			}
 
 			function createResultSummary(results) {
+				const muslimFriendly = hidePigReferenceInput.checked;
+				const chineseDisplay = getChineseZodiacDisplay(
+					results.zodiac,
+					muslimFriendly,
+				);
+
 				return [
 					"Universal Age Calculator",
 					"",
@@ -1379,8 +1459,10 @@ function getCalendarDateParts(date, calendar) {
 					`Exact age: ${results.exactAge.years} years, ${results.exactAge.months} months and ${results.exactAge.days} days`,
 					`Next birthday: ${formatFullDate(results.nextBirthday.date)} (${results.nextBirthday.daysUntil} days)`,
 					`Hijri birth date: ${results.hijriBirthDate}`,
-					`Persian birth date: ${results.persianBirthDate}`,
-					`Chinese zodiac: ${results.zodiac.element} ${results.zodiac.animal}`,
+					`Western star sign: ${results.westernZodiac.name} (${results.westernZodiac.range})`,
+					chineseDisplay.hideAnimal
+						? `Chinese zodiac traits: ${chineseDisplay.title} ${chineseDisplay.element}; ${chineseDisplay.description}`
+						: `Chinese zodiac: ${chineseDisplay.element.replace(" element", "")} ${chineseDisplay.title}`,
 				].join("\n");
 			}
 
@@ -1389,6 +1471,12 @@ function getCalendarDateParts(date, calendar) {
 				const context = canvas.getContext("2d");
 
 				if (!context) return;
+
+				const muslimFriendly = hidePigReferenceInput.checked;
+				const chineseDisplay = getChineseZodiacDisplay(
+					results.zodiac,
+					muslimFriendly,
+				);
 
 				canvas.width = 1200;
 				canvas.height = 1200;
@@ -1472,19 +1560,55 @@ function getCalendarDateParts(date, calendar) {
 					815,
 				);
 
+				const showHijriOnCard = muslimFriendly;
+				const cardPanelHeight = showHijriOnCard ? 210 : 150;
+
 				context.fillStyle = "rgba(255, 255, 255, 0.14)";
-				roundRect(context, 150, 880, 900, 150, 28);
+				roundRect(context, 150, 865, 900, cardPanelHeight, 28);
 				context.fill();
 
-				context.fillStyle = "#ffffff";
-				context.font =
-					"700 31px Arial, Helvetica, sans-serif";
+				const westernLine = `${results.westernZodiac.symbol} ${results.westernZodiac.name}`;
+				const chineseLine = chineseDisplay.hideAnimal
+					? chineseDisplay.element
+					: `${chineseDisplay.element.replace(" element", "")} ${chineseDisplay.title}`;
 
-				context.fillText(
-					`${results.zodiac.element} ${results.zodiac.animal} · ${results.hijriBirthDate}`,
-					600,
-					960,
-				);
+				if (showHijriOnCard) {
+					context.fillStyle = "#ffffff";
+					context.font =
+						"700 31px Arial, Helvetica, sans-serif";
+					context.fillText(
+						`Hijri birth date: ${results.hijriBirthDate}`,
+						600,
+						915,
+					);
+
+					context.fillStyle = "#ffffff";
+					context.font =
+						"700 31px Arial, Helvetica, sans-serif";
+					context.fillText(
+						`${westernLine} · ${chineseLine}`,
+						600,
+						960,
+					);
+
+					context.fillStyle = "rgba(255, 255, 255, 0.86)";
+					context.font =
+						"500 24px Arial, Helvetica, sans-serif";
+					context.fillText(
+						chineseDisplay.description,
+						600,
+						1005,
+					);
+				} else {
+					context.fillStyle = "#ffffff";
+					context.font =
+						"700 31px Arial, Helvetica, sans-serif";
+					context.fillText(
+						`${westernLine} · ${chineseLine}`,
+						600,
+						950,
+					);
+				}
 
 				context.fillStyle = "rgba(255, 255, 255, 0.65)";
 				context.font =
@@ -1493,7 +1617,7 @@ function getCalendarDateParts(date, calendar) {
 				context.fillText(
 					"Created with Universal Age Calculator",
 					600,
-					1120,
+					1135,
 				);
 
 				const downloadLink = document.createElement("a");
@@ -1912,6 +2036,239 @@ function getCalendarDateParts(date, calendar) {
 		box-shadow: 0 0 0 4px rgba(102, 87, 255, 0.14);
 	}
 
+
+	form .preference-option {
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+		gap: 17px;
+		width: 100%;
+		margin-top: 16px;
+		padding: 18px 19px;
+		overflow: hidden;
+		border: 1px solid rgba(102, 87, 255, 0.14);
+		border-radius: 16px;
+		background:
+			linear-gradient(135deg, rgba(102, 87, 255, 0.055), transparent 62%),
+			var(--surface-soft);
+		box-shadow:
+			0 10px 26px rgba(52, 64, 84, 0.045),
+			inset 0 1px 0 rgba(255, 255, 255, 0.58);
+		cursor: pointer;
+		user-select: none;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			background 180ms ease;
+	}
+
+	form .preference-option:hover {
+		transform: translateY(-2px);
+		border-color: rgba(102, 87, 255, 0.34);
+		box-shadow:
+			0 16px 34px rgba(52, 64, 84, 0.085),
+			0 0 0 4px rgba(102, 87, 255, 0.045);
+	}
+
+	form .preference-option:focus-within {
+		border-color: rgba(102, 87, 255, 0.66);
+		box-shadow:
+			0 14px 32px rgba(52, 64, 84, 0.08),
+			0 0 0 4px rgba(102, 87, 255, 0.13);
+	}
+
+	form .preference-option input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		min-height: 0;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.preference-control {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		width: 34px;
+		height: 34px;
+		flex: 0 0 34px;
+		place-items: center;
+		margin-top: 1px;
+		border: 1.5px solid rgba(102, 87, 255, 0.3);
+		border-radius: 10px;
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 247, 255, 0.94));
+		box-shadow:
+			0 6px 15px rgba(52, 64, 84, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.9);
+		transition:
+			transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+			border-color 180ms ease,
+			background 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	:root[data-theme="dark"] .preference-control {
+		background: linear-gradient(180deg, #222838, #1a1f2c);
+		box-shadow:
+			0 6px 15px rgba(0, 0, 0, 0.18),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	}
+
+	.preference-control::after {
+		position: absolute;
+		inset: 5px;
+		content: "";
+		border-radius: 6px;
+		background: rgba(102, 87, 255, 0.07);
+		opacity: 0;
+		transform: scale(0.65);
+		transition:
+			opacity 180ms ease,
+			transform 220ms ease;
+	}
+
+	.preference-control svg {
+		position: relative;
+		z-index: 1;
+		width: 19px;
+		height: 19px;
+		fill: none;
+		stroke: #ffffff;
+		stroke-width: 2.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		opacity: 0;
+		transform: scale(0.45) rotate(-10deg);
+		transition:
+			opacity 150ms ease,
+			transform 230ms cubic-bezier(0.2, 0.85, 0.2, 1.2);
+	}
+
+	.preference-copy {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		min-width: 0;
+		flex: 1;
+		flex-direction: column;
+		gap: 7px;
+		padding-top: 1px;
+	}
+
+	.preference-copy strong,
+	.preference-copy small {
+		display: block;
+	}
+
+	.preference-copy strong {
+		color: var(--text);
+		font-size: 0.96rem;
+		font-weight: 760;
+		line-height: 1.25;
+		letter-spacing: -0.018em;
+	}
+
+	.preference-copy small {
+		max-width: 295px;
+		color: var(--text-soft);
+		font-size: 0.78rem;
+		font-weight: 500;
+		line-height: 1.52;
+		letter-spacing: -0.005em;
+	}
+
+	.preference-glow {
+		position: absolute;
+		top: -70px;
+		left: -55px;
+		width: 180px;
+		height: 180px;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(102, 87, 255, 0.24), transparent 68%);
+		opacity: 0;
+		transform: scale(0.72);
+		pointer-events: none;
+		transition:
+			opacity 300ms ease,
+			transform 420ms ease;
+	}
+
+	form .preference-option:has(input:checked) {
+		border-color: rgba(102, 87, 255, 0.48);
+		background:
+			linear-gradient(135deg, rgba(102, 87, 255, 0.13), rgba(124, 92, 231, 0.045) 72%),
+			var(--surface-soft);
+		box-shadow:
+			0 16px 36px rgba(102, 87, 255, 0.12),
+			0 0 0 1px rgba(102, 87, 255, 0.04);
+	}
+
+	form .preference-option input:checked + .preference-control {
+		border-color: transparent;
+		background: linear-gradient(135deg, var(--primary), #7b5bea);
+		box-shadow:
+			0 9px 20px rgba(102, 87, 255, 0.3),
+			0 0 0 5px rgba(102, 87, 255, 0.09);
+		transform: scale(1.03);
+		animation: preference-check-pop 420ms ease;
+	}
+
+	form .preference-option input:checked + .preference-control::after {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	form .preference-option input:checked + .preference-control svg {
+		opacity: 1;
+		transform: scale(1) rotate(0);
+	}
+
+	form .preference-option:has(input:checked) .preference-glow {
+		opacity: 0.72;
+		transform: scale(1);
+		animation: preference-glow-pulse 700ms ease;
+	}
+
+	form .preference-option:has(input:checked) .preference-copy strong {
+		color: var(--primary-text);
+	}
+
+	@keyframes preference-check-pop {
+		0% {
+			transform: scale(0.78);
+		}
+
+		55% {
+			transform: scale(1.1);
+		}
+
+		100% {
+			transform: scale(1.03);
+		}
+	}
+
+	@keyframes preference-glow-pulse {
+		0% {
+			opacity: 0;
+			transform: scale(0.55);
+		}
+
+		50% {
+			opacity: 0.92;
+			transform: scale(1.12);
+		}
+
+		100% {
+			opacity: 0.72;
+			transform: scale(1);
+		}
+	}
 	.form-error {
 		min-height: 21px;
 		margin: 8px 0 4px;
@@ -2188,9 +2545,15 @@ function getCalendarDateParts(date, calendar) {
 		background: rgba(16, 185, 129, 0.12);
 	}
 
-	.persian-card .calendar-symbol {
-		color: #d9821f;
-		background: rgba(245, 158, 11, 0.13);
+	.western-card .calendar-symbol {
+		color: #7c5ce7;
+		background: rgba(124, 92, 231, 0.13);
+	}
+
+	.western-symbol span {
+		font-size: 1.55rem;
+		font-weight: 800;
+		line-height: 1;
 	}
 
 	.zodiac-card .calendar-symbol {
@@ -2759,8 +3122,8 @@ function getCalendarDateParts(date, calendar) {
 		background: rgba(16, 185, 129, 0.08);
 	}
 
-	.persian-card::after {
-		background: rgba(245, 158, 11, 0.09);
+	.western-card::after {
+		background: rgba(124, 92, 231, 0.09);
 	}
 
 	.zodiac-card::after {
