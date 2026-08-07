@@ -1569,7 +1569,7 @@ function getCalendarDateParts(date, calendar) {
 
 				const westernLine = `${results.westernZodiac.symbol} ${results.westernZodiac.name}`;
 				const chineseLine = chineseDisplay.hideAnimal
-					? chineseDisplay.element
+					? `${results.zodiac.element} element`
 					: `${chineseDisplay.element.replace(" element", "")} ${chineseDisplay.title}`;
 
 				if (showHijriOnCard) {
