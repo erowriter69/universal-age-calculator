@@ -4,6 +4,59 @@ const pageTitle =
 
 const pageDescription =
 	"Calculate your exact age in years, months and days. Discover your Hijri birth date, Western star sign, Chinese zodiac, next birthday and lifetime statistics.";
+
+const faqItems = [
+	{
+		question: "How is my exact age calculated?",
+		answer:
+			"Your exact age is calculated by comparing your birth year, month and day with the current local date on your device. The calculator counts completed calendar years first, then completed months, then the remaining days.",
+	},
+	{
+		question: "Does this age calculator account for leap years?",
+		answer:
+			"Yes. Leap years are handled when calculating your exact age and your next birthday. The Gregorian calendar normally adds February 29 every four years, except for century years that are not divisible by 400.",
+	},
+	{
+		question: "What happens if I was born on February 29?",
+		answer:
+			"For leap-day birthdays, the calculator keeps February 29 as your birth date. In a non-leap year, the next-birthday display uses February 28 so the countdown remains practical and consistent.",
+	},
+	{
+		question: "Why can my Hijri birth date differ from another converter?",
+		answer:
+			"Hijri dates can vary by a day between sources because Islamic calendars may use different calculation methods, regional conventions or moon-sighting practices. This calculator uses the Islamic calendar support available in your browser.",
+	},
+	{
+		question: "How is my Western zodiac sign determined?",
+		answer:
+			"Your Western zodiac sign is determined from the month and day of your Gregorian birth date using the commonly used twelve-sign date ranges, from Aries through Pisces.",
+	},
+	{
+		question: "How is my Chinese zodiac calculated?",
+		answer:
+			"The Chinese zodiac follows the Chinese calendar rather than changing on January 1. The calculator reads the Chinese calendar year for your birth date, then determines the traditional animal and five-element cycle for that year.",
+	},
+	{
+		question: "Is my birth date saved or uploaded?",
+		answer:
+			"No. Your selected birth date is processed locally in your browser for the calculations on this page. The calculator does not need to upload the date to a server to produce your results.",
+	},
+	{
+		question: "Are the heartbeat, breathing and sleep totals exact?",
+		answer:
+			"No. Those values are clearly labelled estimates. They use general rates to turn your time lived into interesting lifetime statistics, so they should not be treated as medical measurements.",
+	},
+	{
+		question: "Can I use the calculator for someone else's birthday?",
+		answer:
+			"Yes. You can enter any valid birth date that is not in the future. This makes the calculator useful for checking the age of a family member, friend or historical date as well as your own.",
+	},
+	{
+		question: "Why can total months differ from my calendar age in months?",
+		answer:
+			"The exact age at the top uses calendar years, months and days. The separate lifetime total for months is an approximate conversion based on the average length of a Gregorian month, so it answers a different question.",
+	},
+];
 ---
 
 <!doctype html>
@@ -58,6 +111,35 @@ const pageDescription =
 		<meta name="theme-color" content="#6657ff" />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "WebSite",
+						"@id": "https://universal-age-calculator.pages.dev/#website",
+						url: "https://universal-age-calculator.pages.dev/",
+						name: "Universal Age Calculator",
+						description: pageDescription,
+						inLanguage: "en",
+					},
+					{
+						"@type": "FAQPage",
+						"@id": "https://universal-age-calculator.pages.dev/#faq",
+						mainEntity: faqItems.map((item) => ({
+							"@type": "Question",
+							name: item.question,
+							acceptedAnswer: {
+								"@type": "Answer",
+								text: item.answer,
+							},
+						})),
+					},
+				],
+			})}
+		/>
 
 		<script is:inline>
 			(function () {
@@ -132,7 +214,7 @@ const pageDescription =
 		</header>
 
 		<main>
-			<section class="hero">
+			<section id="calculator" class="hero">
 				<div class="container hero-inner">
 					<div class="hero-copy">
 						<p class="eyebrow">More than a birthday calculator</p>
@@ -343,7 +425,7 @@ const pageDescription =
 						</article>
 					</div>
 
-					<section class="world-calendar-panel">
+					<section id="birth-traditions" class="world-calendar-panel">
 						<div class="panel-heading">
 							<div>
 								<p class="card-label">Birth traditions</p>
@@ -440,7 +522,7 @@ const pageDescription =
 						</div>
 					</section>
 
-					<section class="statistics-panel">
+					<section id="lifetime-statistics" class="statistics-panel">
 						<div class="statistics-heading">
 							<div>
 								<p class="card-label">Lifetime statistics</p>
@@ -613,86 +695,411 @@ const pageDescription =
 				</div>
 			</section>
 
-			<section class="information-section">
-				<div class="container information-grid">
-					<div>
-						<p class="eyebrow">Simple, private and precise</p>
-						<h2>What does this age calculator show?</h2>
+			<section id="age-guide" class="age-guide-section">
+				<div class="container">
+					<div class="guide-intro">
+						<div>
+							<p class="eyebrow">Age calculation guide</p>
+							<h2>Everything you need to know about age calculation</h2>
+						</div>
+
+						<p>
+							An age calculator looks simple on the surface, but an accurate result
+							has to respect real calendar rules. Months have different lengths,
+							leap years add an extra day, and calendar traditions do not all begin
+							their years on the same date. This guide explains what the numbers on
+							this page mean and how the calculator arrives at them.
+						</p>
 					</div>
 
-					<div class="information-copy">
-						<p>
-							The calculator compares your selected birth date with the
-							current date and displays your completed years, remaining
-							months and days.
-						</p>
+					<nav class="guide-jump-links" aria-label="Age calculator guide">
+						<a href="#what-is-an-age-calculator">What it does</a>
+						<a href="#how-age-is-calculated">How age is calculated</a>
+						<a href="#leap-years">Leap years</a>
+						<a href="#age-units">Age in different units</a>
+						<a href="#birth-traditions-guide">Birth traditions</a>
+					</nav>
 
-						<p>
-							It also converts your birth date into the Islamic Hijri calendar,
-							identifies your Western star sign and Chinese zodiac, and
-							calculates how many weeks, days, hours, minutes and seconds
-							you have lived.
-						</p>
+					<div class="guide-feature-grid">
+						<article id="what-is-an-age-calculator" class="guide-card guide-card-wide">
+							<div class="guide-number" aria-hidden="true">01</div>
+							<div>
+								<h3>What is an age calculator?</h3>
+								<p>
+									An age calculator measures the time between a birth date and a
+									reference date, normally today. A useful calculator does more than
+									subtract one year number from another. It works out how many complete
+									years have passed, how many complete calendar months followed those
+									years, and how many days remain after that.
+								</p>
+								<p>
+									That distinction matters. Someone born late in the year has not
+									reached the same age as someone born early in the year simply because
+									the current year minus the birth year produces the same number. Their
+									birthday has to occur first. This calculator therefore treats age as
+									calendar time rather than a rough difference between two year values.
+								</p>
+								<p>
+									The result is then expanded into other useful views: total weeks,
+									days, hours, minutes and seconds lived, the next birthday countdown,
+									the weekday of birth, Hijri date, Western zodiac sign and Chinese
+									zodiac. Those extra results all begin with the same selected birth
+									date, but they answer different questions about it.
+								</p>
+							</div>
+						</article>
 
-						<p>
-							Everything is calculated inside your browser. Your date is
-							not uploaded to a server or stored in an online account.
-						</p>
+						<article id="how-age-is-calculated" class="guide-card">
+							<div class="guide-number" aria-hidden="true">02</div>
+							<h3>How exact age is calculated</h3>
+							<p>
+								The calculator starts with the current date on your device and your
+								selected date of birth. It first finds the difference between the two
+								years. If your birthday has not yet occurred in the current year, one
+								year is removed from that total.
+							</p>
+							<p>
+								It then compares the months. When the current day number is earlier
+								than the birth-day number, the calculation borrows the actual number
+								of days from the previous calendar month. That is important because a
+								month can contain 28, 29, 30 or 31 days.
+							</p>
+							<div class="guide-formula">
+								<span>Exact age</span>
+								<strong>completed years + completed months + remaining days</strong>
+							</div>
+						</article>
+
+						<article class="guide-card">
+							<div class="guide-number" aria-hidden="true">03</div>
+							<h3>Why month length matters</h3>
+							<p>
+								Calendar months are not interchangeable units. February is shorter
+								than March, while April, June, September and November have 30 days and
+								several other months have 31. An exact calendar age must use the real
+								month boundaries rather than assuming that every month lasts 30 days.
+							</p>
+							<p>
+								This is also why an exact result such as “26 years, 4 months and 9
+								days” is different from taking total days lived and dividing by an
+								average month length. Both numbers can be useful, but they describe
+								time in different ways.
+							</p>
+						</article>
+
+						<article id="leap-years" class="guide-card guide-card-wide">
+							<div class="guide-number" aria-hidden="true">04</div>
+							<div>
+								<h3>Leap years and February 29 birthdays</h3>
+								<p>
+									The Gregorian calendar is about 365.2425 days long on average, so
+									most years contain 365 days and leap years contain 366. The usual
+									rule is that a year divisible by four is a leap year. Century years
+									are the exception: they must also be divisible by 400. That is why
+									2000 was a leap year, while 1900 was not.
+								</p>
+								<p>
+									If you were born on February 29, your recorded birth date remains
+									February 29 even though that date does not appear every year. This
+									calculator preserves the leap-day birth date in the age calculation.
+									For the next-birthday countdown in a non-leap year, it uses February
+									28 so the countdown has a practical annual date rather than skipping
+									straight to the next leap year.
+								</p>
+								<div class="guide-note">
+									<strong>Example:</strong>
+									A person born on February 29, 2000 still has a leap-day birth
+									date. Their exact age advances normally each year; February 29 is
+									simply the special calendar date on which they were born.
+								</div>
+							</div>
+						</article>
+
+						<article id="age-units" class="guide-card">
+							<div class="guide-number" aria-hidden="true">05</div>
+							<h3>Age in years, months, weeks and days</h3>
+							<p>
+								Different age units are useful in different situations. Years are the
+								standard way to describe a person's age. Months are especially useful
+								for babies and short time spans. Weeks and days are useful when you
+								want a more precise sense of how much time has passed.
+							</p>
+							<p>
+								The lifetime statistics on this page also show hours, minutes and
+								seconds. Those totals are based on elapsed time and continue updating
+								while the results are open. The “total months” statistic is an
+								approximate conversion using the average Gregorian month length,
+								whereas the large age result uses true calendar months.
+							</p>
+						</article>
+
+						<article class="guide-card">
+							<div class="guide-number" aria-hidden="true">06</div>
+							<h3>Why your age changes throughout the day</h3>
+							<p>
+								Your age in completed years changes on your birthday, but your time
+								lived never stops increasing. Every second adds another second to the
+								lifetime total. That is why this calculator separates calendar age
+								from live elapsed-time statistics.
+							</p>
+							<p>
+								The calculation intentionally uses the local date and time on your
+								device. Around midnight, two people in different time zones can
+								therefore see a different current date for a short period. That is
+								normal: birthdays and calendar dates are local experiences.
+							</p>
+						</article>
+					</div>
+
+					<section id="birth-traditions-guide" class="traditions-guide">
+						<div class="traditions-guide-heading">
+							<p class="card-label">Beyond the Gregorian date</p>
+							<h3>One birthday, several traditions</h3>
+							<p>
+								A single Gregorian birth date can be represented or interpreted in
+								different ways. The calculator keeps those traditions separate so
+								you can see each result without confusing it with your exact age.
+							</p>
+						</div>
+
+						<div class="traditions-explainer-grid">
+							<article>
+								<span class="tradition-mark" aria-hidden="true">☾</span>
+								<h4>Hijri birth date</h4>
+								<p>
+									The Islamic Hijri calendar is lunar, with months tied to lunar
+									cycles rather than the solar year used by the Gregorian calendar.
+									A Hijri year is therefore shorter than a Gregorian year, so the same
+									Gregorian birthday does not stay on the same Hijri date each year.
+								</p>
+								<p>
+									Different Islamic calendar methods can occasionally place a date one
+									day apart. Regional moon sighting, tabular calculations and calendar
+									implementations can all contribute to that difference. The date shown
+									here comes from the Islamic calendar support in your browser.
+								</p>
+							</article>
+
+							<article>
+								<span class="tradition-mark" aria-hidden="true">✦</span>
+								<h4>Western zodiac sign</h4>
+								<p>
+									Western astrology commonly divides the year into twelve zodiac
+									signs. The star-sign result on this page is based on the conventional
+									date ranges for Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra,
+									Scorpio, Sagittarius, Capricorn, Aquarius and Pisces.
+								</p>
+								<p>
+									The result is provided as a cultural and entertainment feature. It
+									does not affect the mathematical age calculation, and the descriptive
+									traits should not be treated as scientific measurements of
+									personality.
+								</p>
+							</article>
+
+							<article>
+								<span class="tradition-mark" aria-hidden="true">◎</span>
+								<h4>Chinese zodiac and element</h4>
+								<p>
+									The Chinese zodiac uses a twelve-animal cycle together with a
+									five-element cycle. Crucially, the Chinese zodiac year does not
+									change on January 1. A person born in January or early February may
+									belong to the previous Chinese calendar year.
+								</p>
+								<p>
+									For that reason, this calculator asks the browser for the Chinese
+									calendar year corresponding to the actual birth date instead of using
+									the Gregorian year alone. The optional Muslim preference changes only
+									how one animal label is presented; it does not change the element or
+									the underlying calendar-year calculation.
+								</p>
+							</article>
+						</div>
+					</section>
+
+					<div class="accuracy-panel">
+						<div class="accuracy-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24">
+								<path d="m5 12 4 4L19 6"></path>
+							</svg>
+						</div>
+						<div>
+							<p class="card-label">Designed for transparent results</p>
+							<h3>Exact where it can be exact, clear where it is an estimate</h3>
+							<p>
+								The calendar-age result, next birthday and elapsed-time totals are
+								calculated from your selected date. Heartbeats, breaths and hours
+								asleep are estimates based on general rates and are labelled as such.
+								Zodiac descriptions are traditional or entertainment content rather
+								than scientific claims. Keeping those categories separate makes the
+								page more useful without pretending that every number has the same
+								kind of precision.
+							</p>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<section class="faq-section">
+			<section class="faq-section" id="faq">
 				<div class="container">
-					<div class="section-heading faq-heading">
-						<p class="eyebrow">Frequently asked questions</p>
-						<h2>Age calculator questions</h2>
-					</div>
-
-					<div class="faq-list">
-						<details>
-							<summary>How is my exact age calculated?</summary>
+					<div class="faq-layout">
+						<div class="faq-heading-block">
+							<p class="eyebrow">Frequently asked questions</p>
+							<h2>Age calculator questions, answered</h2>
 							<p>
-								Your exact age is calculated by comparing your birth year,
-								month and day with the current local date on your device.
+								These answers explain the calendar rules, privacy choices and
+								traditions used by the calculator.
 							</p>
-						</details>
+						</div>
 
-						<details>
-							<summary>Is my birth date saved?</summary>
-							<p>
-								No. The calculation happens locally in your browser and
-								your selected birth date is not uploaded by this website.
-							</p>
-						</details>
-
-						<details>
-							<summary>Are the heartbeat and sleep totals exact?</summary>
-							<p>
-								No. These are general estimates designed for entertainment.
-								Real values vary between individuals and throughout life.
-							</p>
-						</details>
-
-						<details>
-							<summary>Why can calendar dates vary between sources?</summary>
-							<p>
-								Calendar conversions can vary slightly depending on the
-								regional method, observation rules and calendar system used.
-							</p>
-						</details>
+						<div class="faq-list">
+							{faqItems.map((item) => (
+								<details>
+									<summary>{item.question}</summary>
+									<p>{item.answer}</p>
+								</details>
+							))}
+						</div>
 					</div>
 				</div>
 			</section>
 		</main>
 
-		<footer>
-			<div class="container footer-inner">
-				<p>
-					© <span id="current-year"></span> Universal Age Calculator
-				</p>
+		<footer class="site-footer">
+			<div class="footer-glow footer-glow-one" aria-hidden="true"></div>
+			<div class="footer-glow footer-glow-two" aria-hidden="true"></div>
 
-				<p>Built as a fast and private browser-based tool.</p>
+			<div class="container footer-shell">
+				<div class="footer-main">
+					<div class="footer-brand-column">
+						<a class="footer-brand" href="#calculator" aria-label="Universal Age Calculator">
+							<span class="footer-brand-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<path
+										d="M12 2.75a1 1 0 0 1 .93.63l1.5 3.76a4 4 0 0 0 2.24 2.24l3.76 1.5a1 1 0 0 1 0 1.86l-3.76 1.5a4 4 0 0 0-2.24 2.24l-1.5 3.76a1 1 0 0 1-1.86 0l-1.5-3.76a4 4 0 0 0-2.24-2.24l-3.76-1.5a1 1 0 0 1 0-1.86l3.76-1.5a4 4 0 0 0 2.24-2.24l1.5-3.76a1 1 0 0 1 .93-.63Z"
+									></path>
+								</svg>
+							</span>
+
+							<span class="footer-brand-copy">
+								<strong>Universal</strong>
+								<small>Age Calculator</small>
+							</span>
+						</a>
+
+						<p class="footer-description">
+							Calculate your exact age, explore your birth date across traditions,
+							and discover the story behind the numbers — privately in your browser.
+						</p>
+
+						<div class="footer-trust" aria-label="Tool benefits">
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Free to use
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								No sign-up
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Private calculations
+							</span>
+						</div>
+					</div>
+
+					<nav class="footer-navigation" aria-label="Footer navigation">
+						<p class="footer-heading">Explore</p>
+
+						<a href="#calculator">
+							<span>Age calculator</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="#birth-traditions">
+							<span>Birth traditions</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="#lifetime-statistics">
+							<span>Lifetime statistics</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="#age-guide">
+							<span>Age calculation guide</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="#faq">
+							<span>Frequently asked questions</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+					</nav>
+
+					<div class="footer-privacy-column">
+						<p class="footer-heading">Privacy by design</p>
+
+						<div class="footer-privacy-card">
+							<div class="footer-privacy-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="5" y="10" width="14" height="11" rx="2"></rect>
+									<path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+								</svg>
+							</div>
+
+							<div>
+								<strong>Your birth date stays with you.</strong>
+								<p>
+									Calculations happen locally in your browser. Your selected birth
+									date is not uploaded to an account or stored by this tool.
+								</p>
+							</div>
+						</div>
+
+						<a class="footer-back-link" href="#calculator">
+							Back to calculator
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 19V5"></path>
+								<path d="m6 11 6-6 6 6"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<div class="footer-bottom">
+					<p>
+						© <span id="current-year"></span> Universal Age Calculator.
+						All calculations are provided for informational use.
+					</p>
+
+					<p class="footer-bottom-note">
+						Fast, accessible and browser-based.
+					</p>
+				</div>
 			</div>
 		</footer>
 
@@ -2345,7 +2752,7 @@ function getCalendarDateParts(date, calendar) {
 	}
 
 	.section-heading h2,
-	.information-section h2,
+	.age-guide-section h2,
 	.faq-section h2 {
 		margin-bottom: 14px;
 		font-size: clamp(2rem, 4vw, 3.2rem);
@@ -2901,33 +3308,311 @@ function getCalendarDateParts(date, calendar) {
 		border-color: var(--primary);
 	}
 
-	.information-section {
-		padding: 82px 0;
+	.age-guide-section {
+		padding: 92px 0;
+		background:
+			radial-gradient(
+				circle at 8% 10%,
+				rgba(102, 87, 255, 0.07),
+				transparent 25%
+			),
+			var(--surface);
 	}
 
-	.information-grid {
+	.guide-intro {
 		display: grid;
-		grid-template-columns: 0.8fr 1.2fr;
-		gap: 80px;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		align-items: end;
+		gap: 70px;
+		margin-bottom: 28px;
 	}
 
-	.information-copy p:last-child {
+	.guide-intro h2 {
+		max-width: 660px;
 		margin-bottom: 0;
 	}
 
+	.guide-intro > p {
+		margin: 0;
+		color: var(--text-soft);
+		font-size: 1.02rem;
+		line-height: 1.8;
+	}
+
+	.guide-jump-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 34px;
+		padding-bottom: 28px;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.guide-jump-links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 38px;
+		padding: 8px 13px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-soft);
+		background: var(--surface-raised);
+		font-size: 0.8rem;
+		font-weight: 750;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			color 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.guide-jump-links a:hover {
+		transform: translateY(-1px);
+		border-color: rgba(102, 87, 255, 0.32);
+		color: var(--primary-text);
+		box-shadow: 0 8px 18px rgba(52, 64, 84, 0.07);
+	}
+
+	.guide-feature-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.guide-card {
+		position: relative;
+		padding: 30px;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		border-radius: 24px;
+		background:
+			linear-gradient(
+				145deg,
+				rgba(102, 87, 255, 0.035),
+				transparent 46%
+			),
+			var(--surface-raised);
+		box-shadow: 0 15px 38px rgba(52, 64, 84, 0.055);
+	}
+
+	.guide-card-wide {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-column: 1 / -1;
+		gap: 24px;
+		padding: 34px;
+	}
+
+	.guide-number {
+		display: grid;
+		width: 48px;
+		height: 48px;
+		place-items: center;
+		border: 1px solid rgba(102, 87, 255, 0.16);
+		border-radius: 15px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.76rem;
+		font-weight: 900;
+		letter-spacing: 0.06em;
+	}
+
+	.guide-card:not(.guide-card-wide) .guide-number {
+		margin-bottom: 22px;
+	}
+
+	.guide-card h3,
+	.traditions-guide h3,
+	.accuracy-panel h3 {
+		margin: 0 0 14px;
+		font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+		line-height: 1.18;
+		letter-spacing: -0.035em;
+	}
+
+	.guide-card p,
+	.traditions-guide p,
+	.accuracy-panel p {
+		color: var(--text-soft);
+		line-height: 1.78;
+	}
+
+	.guide-card p:last-child,
+	.traditions-guide p:last-child,
+	.accuracy-panel p:last-child {
+		margin-bottom: 0;
+	}
+
+	.guide-formula {
+		display: grid;
+		gap: 5px;
+		margin-top: 22px;
+		padding: 17px 18px;
+		border: 1px solid rgba(102, 87, 255, 0.16);
+		border-radius: 15px;
+		background: var(--primary-soft);
+	}
+
+	.guide-formula span {
+		color: var(--primary-text);
+		font-size: 0.72rem;
+		font-weight: 850;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.guide-formula strong {
+		color: var(--text);
+		font-size: 0.92rem;
+		line-height: 1.45;
+	}
+
+	.guide-note {
+		margin-top: 22px;
+		padding: 18px 20px;
+		border-left: 3px solid var(--primary);
+		border-radius: 0 15px 15px 0;
+		color: var(--text-soft);
+		background: var(--primary-soft);
+		line-height: 1.7;
+	}
+
+	.guide-note strong {
+		color: var(--primary-text);
+	}
+
+	.traditions-guide {
+		margin-top: 28px;
+		padding: 34px;
+		border: 1px solid var(--border);
+		border-radius: 26px;
+		background: var(--surface-raised);
+		box-shadow: 0 15px 38px rgba(52, 64, 84, 0.055);
+	}
+
+	.traditions-guide-heading {
+		display: grid;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		gap: 50px;
+		align-items: end;
+		margin-bottom: 28px;
+		padding-bottom: 26px;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.traditions-guide-heading h3 {
+		margin-bottom: 0;
+	}
+
+	.traditions-guide-heading > p:last-child {
+		margin: 0;
+	}
+
+	.traditions-explainer-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.traditions-explainer-grid article {
+		padding: 24px;
+		border: 1px solid var(--border);
+		border-radius: 20px;
+		background: var(--surface-soft);
+	}
+
+	.traditions-explainer-grid h4 {
+		margin: 16px 0 11px;
+		font-size: 1.1rem;
+		letter-spacing: -0.025em;
+	}
+
+	.traditions-explainer-grid p {
+		font-size: 0.92rem;
+		line-height: 1.72;
+	}
+
+	.tradition-mark {
+		display: grid;
+		width: 42px;
+		height: 42px;
+		place-items: center;
+		border-radius: 13px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 1.25rem;
+		font-weight: 900;
+	}
+
+	.accuracy-panel {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: start;
+		gap: 20px;
+		margin-top: 28px;
+		padding: 28px 30px;
+		border: 1px solid rgba(12, 138, 97, 0.16);
+		border-radius: 22px;
+		background: var(--success-soft);
+	}
+
+	.accuracy-icon {
+		display: grid;
+		width: 46px;
+		height: 46px;
+		place-items: center;
+		border-radius: 14px;
+		color: var(--success);
+		background: var(--surface);
+	}
+
+	.accuracy-icon svg {
+		width: 22px;
+		height: 22px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.accuracy-panel .card-label {
+		color: var(--success);
+	}
+
 	.faq-section {
-		padding: 82px 0;
+		padding: 92px 0;
 		border-top: 1px solid var(--border);
 		background: var(--background-soft);
 	}
 
-	.faq-heading {
-		margin-bottom: 30px;
+	.faq-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+		align-items: start;
+		gap: 72px;
+	}
+
+	.faq-heading-block {
+		position: sticky;
+		top: 100px;
+	}
+
+	.faq-heading-block h2 {
+		margin-bottom: 16px;
+	}
+
+	.faq-heading-block > p:last-child {
+		max-width: 440px;
+		margin-bottom: 0;
+		color: var(--text-soft);
+		line-height: 1.75;
 	}
 
 	.faq-list {
 		display: grid;
-		max-width: 850px;
+		max-width: none;
 		gap: 12px;
 	}
 
@@ -2935,13 +3620,23 @@ function getCalendarDateParts(date, calendar) {
 		border: 1px solid var(--border);
 		border-radius: 17px;
 		background: var(--surface);
+		box-shadow: 0 8px 22px rgba(52, 64, 84, 0.035);
+		transition:
+			border-color 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.faq-list details[open] {
+		border-color: rgba(102, 87, 255, 0.22);
+		box-shadow: 0 12px 28px rgba(52, 64, 84, 0.06);
 	}
 
 	.faq-list summary {
 		position: relative;
-		padding: 20px 52px 20px 22px;
+		padding: 21px 54px 21px 22px;
 		cursor: pointer;
 		font-weight: 800;
+		line-height: 1.45;
 		list-style: none;
 	}
 
@@ -2967,26 +3662,309 @@ function getCalendarDateParts(date, calendar) {
 		margin: 0;
 		padding: 0 22px 22px;
 		color: var(--text-soft);
-		line-height: 1.7;
+		line-height: 1.75;
 	}
 
-	footer {
-		padding: 28px 0;
-		border-top: 1px solid var(--border);
-		background: var(--surface-raised);
+	.site-footer {
+		position: relative;
+		padding: 72px 0 26px;
+		overflow: hidden;
+		border-top: 1px solid rgba(102, 87, 255, 0.15);
+		background:
+			linear-gradient(
+				180deg,
+				rgba(102, 87, 255, 0.035),
+				transparent 24%
+			),
+			var(--surface-raised);
 	}
 
-	.footer-inner {
+	.footer-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(12px);
+		pointer-events: none;
+	}
+
+	.footer-glow-one {
+		top: -220px;
+		left: -180px;
+		width: 440px;
+		height: 440px;
+		background: rgba(102, 87, 255, 0.08);
+	}
+
+	.footer-glow-two {
+		right: -150px;
+		bottom: -250px;
+		width: 420px;
+		height: 420px;
+		background: rgba(124, 92, 231, 0.075);
+	}
+
+	.footer-shell {
+		position: relative;
+		z-index: 1;
+	}
+
+	.footer-main {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(190px, 0.65fr) minmax(260px, 0.9fr);
+		gap: clamp(38px, 6vw, 82px);
+		padding-bottom: 48px;
+	}
+
+	.footer-brand-column,
+	.footer-privacy-column {
+		min-width: 0;
+	}
+
+	.footer-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.footer-brand-icon {
+		display: grid;
+		width: 44px;
+		height: 44px;
+		place-items: center;
+		border: 1px solid rgba(102, 87, 255, 0.2);
+		border-radius: 14px;
+		background: linear-gradient(
+			135deg,
+			rgba(102, 87, 255, 0.14),
+			rgba(124, 92, 231, 0.06)
+		);
+		box-shadow: 0 10px 24px rgba(102, 87, 255, 0.09);
+	}
+
+	.footer-brand-icon svg {
+		width: 23px;
+		height: 23px;
+		fill: var(--primary);
+	}
+
+	.footer-brand-copy {
+		display: grid;
+		gap: 1px;
+	}
+
+	.footer-brand-copy strong {
+		font-size: 1rem;
+		font-weight: 900;
+		letter-spacing: -0.025em;
+	}
+
+	.footer-brand-copy small {
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		font-weight: 750;
+		letter-spacing: 0.065em;
+		text-transform: uppercase;
+	}
+
+	.footer-description {
+		max-width: 480px;
+		margin: 22px 0 24px;
+		color: var(--text-soft);
+		font-size: 0.92rem;
+		line-height: 1.75;
+	}
+
+	.footer-trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+	}
+
+	.footer-trust span {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 8px 11px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: var(--surface-soft);
+		color: var(--text-soft);
+		font-size: 0.72rem;
+		font-weight: 750;
+	}
+
+	.footer-trust svg {
+		width: 14px;
+		height: 14px;
+		fill: none;
+		stroke: var(--success);
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.footer-heading {
+		margin: 4px 0 18px;
+		color: var(--text);
+		font-size: 0.76rem;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.footer-navigation {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.footer-navigation a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 18px;
+		padding: 9px 0;
+		border-bottom: 1px solid transparent;
+		color: var(--text-soft);
+		font-size: 0.84rem;
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			transform 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.footer-navigation a svg {
+		width: 15px;
+		height: 15px;
+		flex: 0 0 auto;
+		fill: none;
+		stroke: var(--text-faint);
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		opacity: 0;
+		transform: translateX(-5px);
+		transition:
+			opacity 180ms ease,
+			transform 180ms ease,
+			stroke 180ms ease;
+	}
+
+	@media (hover: hover) {
+		.footer-navigation a:hover {
+			color: var(--primary-text);
+			border-color: rgba(102, 87, 255, 0.12);
+			transform: translateX(3px);
+		}
+
+		.footer-navigation a:hover svg {
+			stroke: var(--primary);
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		.footer-back-link:hover {
+			color: var(--primary-text);
+			transform: translateY(-2px);
+		}
+	}
+
+	.footer-privacy-card {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 14px;
+		padding: 18px;
+		border: 1px solid rgba(102, 87, 255, 0.14);
+		border-radius: 18px;
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.07),
+				transparent 70%
+			),
+			var(--surface-soft);
+		box-shadow: 0 14px 34px rgba(52, 64, 84, 0.045);
+	}
+
+	.footer-privacy-icon {
+		display: grid;
+		width: 36px;
+		height: 36px;
+		place-items: center;
+		border-radius: 11px;
+		background: rgba(102, 87, 255, 0.1);
+	}
+
+	.footer-privacy-icon svg {
+		width: 18px;
+		height: 18px;
+		fill: none;
+		stroke: var(--primary);
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.footer-privacy-card strong {
+		display: block;
+		margin-bottom: 6px;
+		color: var(--text);
+		font-size: 0.84rem;
+		line-height: 1.4;
+	}
+
+	.footer-privacy-card p {
+		margin: 0;
+		color: var(--text-faint);
+		font-size: 0.75rem;
+		line-height: 1.65;
+	}
+
+	.footer-back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 18px;
+		color: var(--primary-text);
+		font-size: 0.78rem;
+		font-weight: 850;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.footer-back-link svg {
+		width: 15px;
+		height: 15px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.footer-bottom {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 24px;
+		padding-top: 22px;
+		border-top: 1px solid var(--border);
 	}
 
-	.footer-inner p {
+	.footer-bottom p {
 		margin: 0;
 		color: var(--text-faint);
-		font-size: 0.8rem;
+		font-size: 0.72rem;
+		line-height: 1.6;
+	}
+
+	.footer-bottom-note {
+		flex: 0 0 auto;
 	}
 	/* Polished entrance animations */
 
@@ -3202,9 +4180,19 @@ function getCalendarDateParts(date, calendar) {
 			min-height: auto;
 		}
 
-		.information-grid {
+		.guide-intro,
+		.traditions-guide-heading,
+		.faq-layout {
 			grid-template-columns: 1fr;
-			gap: 30px;
+			gap: 28px;
+		}
+
+		.traditions-explainer-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.faq-heading-block {
+			position: static;
 		}
 	}
 
@@ -3235,7 +4223,7 @@ function getCalendarDateParts(date, calendar) {
 		}
 
 		.results-section,
-		.information-section,
+		.age-guide-section,
 		.faq-section {
 			padding: 62px 0;
 		}
@@ -3255,6 +4243,30 @@ function getCalendarDateParts(date, calendar) {
 
 		.result-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.guide-feature-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.guide-card-wide {
+			grid-template-columns: 1fr;
+			grid-column: auto;
+			gap: 18px;
+			padding: 26px;
+		}
+
+		.guide-card {
+			padding: 26px;
+		}
+
+		.traditions-guide {
+			padding: 24px;
+		}
+
+		.accuracy-panel {
+			grid-template-columns: 1fr;
+			padding: 24px;
 		}
 
 		.result-card {
@@ -3293,16 +4305,60 @@ function getCalendarDateParts(date, calendar) {
 			width: 100%;
 		}
 
-		.footer-inner {
+		.footer-main {
+			grid-template-columns: 1fr;
+			gap: 38px;
+			padding-bottom: 38px;
+		}
+
+		.footer-description {
+			max-width: 600px;
+		}
+
+		.footer-navigation {
+			max-width: 440px;
+		}
+
+		.footer-privacy-column {
+			max-width: 600px;
+		}
+
+		.footer-bottom {
 			align-items: flex-start;
 			flex-direction: column;
-			gap: 7px;
+			gap: 8px;
+		}
+
+		.footer-bottom-note {
+			flex: initial;
 		}
 	}
 
 	@media (max-width: 430px) {
 		.brand-copy small {
 			display: none;
+		}
+
+		.site-footer {
+			padding-top: 56px;
+		}
+
+		.footer-main {
+			gap: 32px;
+		}
+
+		.footer-trust {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.footer-trust span {
+			width: 100%;
+			justify-content: flex-start;
+		}
+
+		.footer-privacy-card {
+			padding: 16px;
 		}
 
 		.age-highlight {
