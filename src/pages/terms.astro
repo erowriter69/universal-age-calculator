@@ -1,0 +1,2618 @@
+---
+const pageTitle = "Terms of Use | Universal Age Calculator";
+const pageDescription =
+	"Read the Terms of Use for Universal Age Calculator, including calculator limitations, calendar and zodiac information, acceptable use and downloadable results.";
+
+const lastUpdated = "August 8, 2026";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link
+			rel="canonical"
+			href="https://universal-age-calculator.pages.dev/terms"
+		/>
+
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta
+			property="og:url"
+			content="https://universal-age-calculator.pages.dev/terms"
+		/>
+		<meta
+			property="og:image"
+			content="https://universal-age-calculator.pages.dev/og-image.png"
+		/>
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta
+			name="twitter:image"
+			content="https://universal-age-calculator.pages.dev/og-image.png"
+		/>
+
+		<meta name="theme-color" content="#6657ff" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "WebPage",
+				name: "Terms of Use",
+				url: "https://universal-age-calculator.pages.dev/terms",
+				description: pageDescription,
+				isPartOf: {
+					"@type": "WebSite",
+					name: "Universal Age Calculator",
+					url: "https://universal-age-calculator.pages.dev/",
+				},
+				dateModified: "2026-08-08",
+				inLanguage: "en",
+			})}
+		/>
+
+		<script is:inline>
+			(function () {
+				const savedTheme = localStorage.getItem("age-calculator-theme");
+				const prefersDark = window.matchMedia(
+					"(prefers-color-scheme: dark)",
+				).matches;
+
+				if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+					document.documentElement.dataset.theme = "dark";
+				}
+			})();
+		</script>
+	</head>
+
+	<body>
+		<header class="site-header">
+			<div class="container header-inner">
+				<a class="brand" href="/" aria-label="Universal Age Calculator home">
+					<span class="brand-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24">
+							<path
+								d="M12 2.75a1 1 0 0 1 .93.63l1.5 3.76a4 4 0 0 0 2.24 2.24l3.76 1.5a1 1 0 0 1 0 1.86l-3.76 1.5a4 4 0 0 0-2.24 2.24l-1.5 3.76a1 1 0 0 1-1.86 0l-1.5-3.76a4 4 0 0 0-2.24-2.24l-3.76-1.5a1 1 0 0 1 0-1.86l3.76-1.5a4 4 0 0 0 2.24-2.24l1.5-3.76a1 1 0 0 1 .93-.63Z"
+							></path>
+						</svg>
+					</span>
+
+					<span class="brand-copy">
+						<strong>Universal</strong>
+						<small>Age Calculator</small>
+					</span>
+				</a>
+
+				<div class="header-actions">
+					<a class="header-badge header-link" href="/">Back to calculator</a>
+
+					<button
+						id="theme-toggle"
+						class="theme-toggle"
+						type="button"
+						aria-label="Switch to dark mode"
+						title="Change colour theme"
+					>
+						<svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+							<circle cx="12" cy="12" r="4"></circle>
+							<path d="M12 2v2"></path>
+							<path d="M12 20v2"></path>
+							<path d="m4.93 4.93 1.42 1.42"></path>
+							<path d="m17.66 17.66 1.41 1.41"></path>
+							<path d="M2 12h2"></path>
+							<path d="M20 12h2"></path>
+							<path d="m6.34 17.66-1.41 1.41"></path>
+							<path d="m19.07 4.93-1.41 1.41"></path>
+						</svg>
+
+						<svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+							<path
+								d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"
+							></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section class="policy-hero terms-hero">
+				<div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+				<div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+				<div class="hero-spark hero-spark-one" aria-hidden="true">✦</div>
+				<div class="hero-spark hero-spark-two" aria-hidden="true">✦</div>
+
+				<div class="container policy-hero-inner">
+					<div class="policy-hero-copy reveal">
+						<div class="hero-kicker">
+							<span class="kicker-dot" aria-hidden="true"></span>
+							Clear and straightforward
+						</div>
+
+						<h1>Terms of Use</h1>
+
+						<p class="hero-description">
+							These terms explain the conditions for using Universal Age
+							Calculator, what the tool is designed to provide, and the
+							limitations that apply to calculated, calendar, zodiac and
+							downloadable results.
+						</p>
+
+						<div class="policy-meta">
+							<span class="meta-pill">
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M8 2v4"></path>
+									<path d="M16 2v4"></path>
+									<rect x="3" y="5" width="18" height="16" rx="2"></rect>
+									<path d="M3 10h18"></path>
+								</svg>
+								Last updated: {lastUpdated}
+							</span>
+
+							<span class="meta-pill">
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<circle cx="12" cy="12" r="9"></circle>
+									<path d="M3 12h18"></path>
+									<path d="M12 3c3 3.3 4.3 6.3 4.3 9S15 17.7 12 21"></path>
+									<path d="M12 3c-3 3.3-4.3 6.3-4.3 9S9 17.7 12 21"></path>
+								</svg>
+								universal-age-calculator.pages.dev
+							</span>
+						</div>
+					</div>
+
+					<aside class="privacy-summary terms-summary reveal" aria-label="Terms summary">
+						<div class="summary-top">
+							<div class="summary-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<path d="M8 3h8l4 4v14H4V3h4Z"></path>
+									<path d="M14 3v5h5"></path>
+									<path d="M8 13h8"></path>
+									<path d="M8 17h6"></path>
+								</svg>
+							</div>
+
+							<span class="summary-status terms-status">
+								<span aria-hidden="true"></span>
+								Informational use
+							</span>
+						</div>
+
+						<p class="summary-label">At a glance</p>
+						<h2>Helpful calculations, not official records.</h2>
+						<p>
+							The calculator is built for everyday informational use. Exact age
+							results are practical calculations, while calendar conversions,
+							zodiac descriptions and lifetime estimates have important context
+							and limitations described below.
+						</p>
+
+						<div class="summary-points">
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								No account or subscription required
+							</span>
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Verify results for official decisions
+							</span>
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Generated cards are not identity documents
+							</span>
+						</div>
+					</aside>
+				</div>
+			</section>
+
+			<section class="policy-section">
+				<div class="container policy-layout">
+					<aside class="policy-nav-wrap">
+						<nav class="policy-nav" aria-label="Terms of Use navigation">
+							<div class="policy-nav-heading">
+								<span class="nav-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M8 6h13"></path>
+										<path d="M8 12h13"></path>
+										<path d="M8 18h13"></path>
+										<circle cx="3" cy="6" r="1"></circle>
+										<circle cx="3" cy="12" r="1"></circle>
+										<circle cx="3" cy="18" r="1"></circle>
+									</svg>
+								</span>
+								<div>
+									<p>On this page</p>
+									<small>12 usage topics</small>
+								</div>
+							</div>
+
+							<div class="nav-links">
+								<a href="#acceptance" data-section-link="acceptance"><span>01</span> Using this website</a>
+								<a href="#calculator" data-section-link="calculator"><span>02</span> Calculator results</a>
+								<a href="#calendar" data-section-link="calendar"><span>03</span> Calendar conversions</a>
+								<a href="#zodiac" data-section-link="zodiac"><span>04</span> Zodiac and traits</a>
+								<a href="#estimates" data-section-link="estimates"><span>05</span> Lifetime estimates</a>
+								<a href="#downloads" data-section-link="downloads"><span>06</span> Downloaded cards</a>
+								<a href="#acceptable-use" data-section-link="acceptable-use"><span>07</span> Acceptable use</a>
+								<a href="#availability" data-section-link="availability"><span>08</span> Availability</a>
+								<a href="#third-parties" data-section-link="third-parties"><span>09</span> Third-party services</a>
+								<a href="#warranties" data-section-link="warranties"><span>10</span> No warranties</a>
+								<a href="#liability" data-section-link="liability"><span>11</span> Limitation of liability</a>
+								<a href="#changes" data-section-link="changes"><span>12</span> Changes to these terms</a>
+							</div>
+
+							<div class="nav-privacy-note terms-nav-note">
+								<div class="nav-note-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3v18"></path>
+										<path d="M3 12h18"></path>
+										<circle cx="12" cy="12" r="9"></circle>
+									</svg>
+								</div>
+								<p>Use the calculator for helpful information, not official certification.</p>
+							</div>
+						</nav>
+					</aside>
+
+					<article class="policy-content">
+						<section id="acceptance" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">01</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M5 12 9 16 19 6"></path><circle cx="12" cy="12" r="9"></circle>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Using this website</h2>
+							<p>By accessing or using Universal Age Calculator, you agree to use the website in accordance with these Terms of Use. If you do not agree with these terms, you should not use the website.</p>
+							<p>The website is provided as a general-purpose online utility. No account or subscription is currently required to use the core calculator.</p>
+							<p>The information produced by this website is for general informational use and should not be treated as professional, legal, medical, financial, religious or other specialist advice.</p>
+
+							<div class="policy-callout terms-callout">
+								<div class="callout-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="9"></circle>
+										<path d="M12 8v4"></path>
+										<path d="M12 16h.01"></path>
+									</svg>
+								</div>
+								<div>
+									<strong>Important</strong>
+									<p>
+										The information produced by this website is for general
+										informational use and should not be treated as professional,
+										legal, medical, financial, religious or other specialist advice.
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<section id="calculator" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">02</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 7h8"></path><path d="M8 11h2"></path><path d="M14 11h2"></path><path d="M8 15h2"></path><path d="M14 15h2"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Age calculator results</h2>
+							<p>The calculator determines age by comparing the birth date you enter with the current date available to your browser. It is designed to account for ordinary differences in month lengths and leap years when presenting completed years, months and days.</p>
+							<p>Results can be affected by the accuracy of the date you enter, the date and time settings on your device, browser behaviour, and software limitations. You are responsible for checking a result before relying on it for any official or consequential purpose.</p>
+							<p>For legal eligibility, identity verification, employment, education, immigration, insurance, benefits, medical care, or other formal decisions, use the method and documentation required by the relevant authority rather than relying solely on this tool.</p>
+
+							<div class="info-strip">
+								<div>
+									<span>Designed for</span>
+									<strong>Everyday age calculations</strong>
+								</div>
+								<div>
+									<span>Official decisions</span>
+									<strong>Verify independently</strong>
+								</div>
+								<div>
+									<span>Accuracy depends on</span>
+									<strong>Your date and device settings</strong>
+								</div>
+							</div>
+						</section>
+
+						<section id="calendar" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">03</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M3 11h18"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Hijri and calendar conversions</h2>
+							<p>The site can present a Hijri birth date using calendar functionality available in the visitor's browser. Calendar conversions may differ from dates used by a particular country, community, mosque, authority, printed calendar, or observation method.</p>
+							<p>The Islamic calendar can be determined through calculated systems, local conventions, or lunar observation. For religious observance or an official date, consult the calendar or authority you normally follow.</p>
+
+							<div class="policy-callout">
+								<div class="callout-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M20.4 14.6A8.7 8.7 0 0 1 9.4 3.6 8.7 8.7 0 1 0 20.4 14.6Z"></path>
+									</svg>
+								</div>
+								<div>
+									<strong>Calendar methods can differ</strong>
+									<p>
+										For religious observance or official dates, use the calendar
+										or authority you normally follow.
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<section id="zodiac" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">04</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3 14.6 8.4 20.5 9.2 16.2 13.3 17.3 19.2 12 16.4 6.7 19.2 7.8 13.3 3.5 9.2 9.4 8.4Z"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Western and Chinese zodiac information</h2>
+							<p>Western star signs, Chinese zodiac animals, elements, and personality descriptions are included as cultural and entertainment-oriented information. Personality descriptions are general traditional associations and are not scientific assessments of an individual.</p>
+							<p>The Chinese zodiac year is determined using the browser's Chinese calendar support where available, which helps account for the fact that the Chinese zodiac year does not begin on January 1.</p>
+							<p>The optional “Are you Muslim?” setting changes presentation for a specific Chinese zodiac result. It does not change the underlying year or element calculation.</p>
+
+							<div class="future-card terms-context-card">
+								<span class="future-status">Traditional information</span>
+								<strong>Zodiac traits are cultural associations, not scientific assessments.</strong>
+								<p>
+									The calculator presents these results for context and
+									entertainment, not as verified personality analysis.
+								</p>
+							</div>
+						</section>
+
+						<section id="estimates" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">05</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M4 18V10"></path><path d="M10 18V6"></path><path d="M16 18V13"></path><path d="M22 18V3"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Lifetime statistics and estimates</h2>
+							<p>Values such as total days, hours, minutes and seconds are mathematical time calculations based on the selected date and the current time. Other features, including estimated heartbeats, breaths and sleep time, use broad assumptions for illustrative and entertainment purposes.</p>
+							<p>Those estimates are not measurements of your body, health, sleep or medical history and should not be interpreted as medical information.</p>
+
+							<div class="info-strip">
+								<div>
+									<span>Elapsed time</span>
+									<strong>Mathematical calculation</strong>
+								</div>
+								<div>
+									<span>Heartbeats & breaths</span>
+									<strong>Broad estimates</strong>
+								</div>
+								<div>
+									<span>Medical use</span>
+									<strong>Not intended</strong>
+								</div>
+							</div>
+						</section>
+
+						<section id="downloads" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">06</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Downloaded age cards and copied results</h2>
+							<p>The website allows you to download an age card and copy a summary of your results. These outputs reflect the information produced by the calculator at the time they are created.</p>
+							<p>You may use your generated age card for ordinary personal and non-misleading sharing. A generated card is not an identity document, certificate, official record, proof of age, or verification issued by an authority.</p>
+							<p>You are responsible for deciding where you share downloaded or copied results. Once you share a file or text outside this website, the privacy and retention practices of the receiving service or person may apply.</p>
+
+							<div class="policy-callout">
+								<div class="callout-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3v12"></path>
+										<path d="m7 10 5 5 5-5"></path>
+										<path d="M5 21h14"></path>
+									</svg>
+								</div>
+								<div>
+									<strong>Share responsibly</strong>
+									<p>
+										Generated cards are personal summaries — not proof of age,
+										identity documents, certificates or official records.
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<section id="acceptable-use" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">07</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3v18"></path><path d="M5 8h14"></path><path d="M7 8 4 13h6L7 8Z"></path><path d="m17 8-3 5h6l-3-5Z"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Acceptable use</h2>
+							<p>You may use the website for lawful personal and ordinary informational purposes. You must not intentionally misuse the site, interfere with its operation, attempt to bypass security measures, or use automated activity in a way that materially disrupts the service for others.</p>
+							<p>You must not present calculator outputs as forged official records or use the site to facilitate fraud, impersonation, or other unlawful conduct.</p>
+
+							<div class="choice-grid">
+								<div>
+									<span>01</span>
+									<strong>Lawful use</strong>
+									<p>Use the tool for ordinary personal and informational purposes.</p>
+								</div>
+								<div>
+									<span>02</span>
+									<strong>Respect the service</strong>
+									<p>Do not interfere with operation or bypass security measures.</p>
+								</div>
+								<div>
+									<span>03</span>
+									<strong>No false records</strong>
+									<p>Do not present calculator output as forged official documentation.</p>
+								</div>
+							</div>
+						</section>
+
+						<section id="availability" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">08</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 11a8 8 0 1 0-2.3 5.7"></path><path d="M20 4v7h-7"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Availability and changes to the tool</h2>
+							<p>We may update, improve, remove, replace, or temporarily suspend features as the website develops. We do not guarantee that every feature will always be available, uninterrupted, error-free, or compatible with every browser or device.</p>
+							<p>Features may also change as browser standards, calendar support, hosting infrastructure, or third-party services change.</p>
+
+						</section>
+
+						<section id="third-parties" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">09</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<circle cx="7" cy="12" r="3"></circle><circle cx="17" cy="7" r="3"></circle><circle cx="17" cy="17" r="3"></circle><path d="m9.5 10.5 5-2"></path><path d="m9.5 13.5 5 2"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Third-party services and external links</h2>
+							<p>The live website currently relies on third-party infrastructure, including Cloudflare Pages, to deliver the service. Those providers operate under their own terms and policies.</p>
+							<p>If the website links to external resources in the future, those sites are independent from Universal Age Calculator. We are not responsible for the content, availability, security, or practices of independent third-party websites.</p>
+
+						</section>
+
+						<section id="warranties" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">10</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M12 3 4 7v5c0 5 3.4 8.2 8 9 4.6-.8 8-4 8-9V7l-8-4Z"></path><path d="M9 12h6"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>No warranties</h2>
+							<p>The website and its results are provided on an “as is” and “as available” basis. While reasonable effort is made to build a useful and accurate calculator, no guarantee is made that every result, conversion, description, estimate, feature or piece of content will be complete, error-free, current, or suitable for a particular purpose.</p>
+							<p>You should independently verify information when accuracy is important to a decision, obligation, deadline, or official record.</p>
+
+							<div class="future-card terms-context-card">
+								<span class="future-status">As is</span>
+								<strong>Independently verify information when accuracy matters.</strong>
+								<p>
+									This is especially important for deadlines, obligations,
+									official records and consequential decisions.
+								</p>
+							</div>
+						</section>
+
+						<section id="liability" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">11</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<circle cx="12" cy="12" r="9"></circle><path d="M12 7v6"></path><path d="M12 17h.01"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Limitation of liability</h2>
+							<p>To the extent permitted by applicable law, Universal Age Calculator and its operator will not be responsible for indirect, incidental, special, consequential, or similar losses arising from use of, inability to use, or reliance on the website or its outputs.</p>
+							<p>Nothing in these terms is intended to exclude or limit liability that cannot lawfully be excluded or limited.</p>
+
+						</section>
+
+						<section id="changes" class="policy-block reveal">
+							<div class="section-head">
+								<span class="section-number">12</span>
+								<div class="section-icon" aria-hidden="true">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 11a8 8 0 1 0-2.3 5.7"></path><path d="M20 4v7h-7"></path>
+									</svg>
+								</div>
+							</div>
+
+							<h2>Changes to these Terms of Use</h2>
+							<p>These terms may be updated as the website grows, particularly if new calculators, user accounts, analytics, advertising, paid features, APIs, or other services are introduced.</p>
+							<p>When the terms are updated, the “Last updated” date at the top of this page will be revised. Your continued use of the website after an updated version becomes effective means the current terms apply to that use.</p>
+
+						</section>
+						<div class="related-policy-card premium-related-card reveal">
+							<div class="related-policy-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="5" y="10" width="14" height="11" rx="2"></rect>
+									<path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+								</svg>
+							</div>
+
+							<div>
+								<p class="eyebrow">Related information</p>
+								<h2>How does the site handle privacy?</h2>
+								<p>
+									Read how browser-based calculations, local storage and
+									technical site delivery are handled.
+								</p>
+							</div>
+
+							<a href="/privacy">
+								Read Privacy Policy
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M5 12h14"></path>
+									<path d="m13 6 6 6-6 6"></path>
+								</svg>
+							</a>
+						</div>
+
+						<div class="policy-end-card reveal">
+							<div class="end-card-glow" aria-hidden="true"></div>
+
+							<div class="end-card-copy">
+								<p class="eyebrow">Return to the tool</p>
+								<h2>Ready to calculate your age?</h2>
+								<p>
+									Use the calculator for exact age, birthday information, birth
+									traditions and lifetime statistics.
+								</p>
+
+								<div class="end-card-trust">
+									<span>
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="m5 12 4 4L19 6"></path>
+										</svg>
+										No sign-up
+									</span>
+									<span>
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="m5 12 4 4L19 6"></path>
+										</svg>
+										Free browser-based tool
+									</span>
+								</div>
+							</div>
+
+							<a href="/">
+								Open Age Calculator
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="M5 12h14"></path>
+									<path d="m13 6 6 6-6 6"></path>
+								</svg>
+							</a>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="footer-glow footer-glow-one" aria-hidden="true"></div>
+			<div class="footer-glow footer-glow-two" aria-hidden="true"></div>
+
+			<div class="container footer-shell">
+				<div class="footer-main">
+					<div class="footer-brand-column">
+						<a class="footer-brand" href="/" aria-label="Universal Age Calculator">
+							<span class="footer-brand-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<path
+										d="M12 2.75a1 1 0 0 1 .93.63l1.5 3.76a4 4 0 0 0 2.24 2.24l3.76 1.5a1 1 0 0 1 0 1.86l-3.76 1.5a4 4 0 0 0-2.24 2.24l-1.5 3.76a1 1 0 0 1-1.86 0l-1.5-3.76a4 4 0 0 0-2.24-2.24l-3.76-1.5a1 1 0 0 1 0-1.86l3.76-1.5a4 4 0 0 0 2.24-2.24l1.5-3.76a1 1 0 0 1 .93-.63Z"
+									></path>
+								</svg>
+							</span>
+
+							<span class="footer-brand-copy">
+								<strong>Universal</strong>
+								<small>Age Calculator</small>
+							</span>
+						</a>
+
+						<p class="footer-description">
+							Calculate your exact age, explore your birth date across traditions,
+							and discover the story behind the numbers — privately in your browser.
+						</p>
+
+						<div class="footer-trust" aria-label="Tool benefits">
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Free to use
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								No sign-up
+							</span>
+
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true">
+									<path d="m5 12 4 4L19 6"></path>
+								</svg>
+								Private calculations
+							</span>
+						</div>
+					</div>
+
+					<nav class="footer-navigation" aria-label="Footer navigation">
+						<p class="footer-heading">Explore</p>
+
+						<a href="/#calculator">
+							<span>Age calculator</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="/#birth-traditions">
+							<span>Birth traditions</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="/#lifetime-statistics">
+							<span>Lifetime statistics</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="/#age-guide">
+							<span>Age calculation guide</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+
+						<a href="/#faq">
+							<span>Frequently asked questions</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M5 12h14"></path>
+								<path d="m13 6 6 6-6 6"></path>
+							</svg>
+						</a>
+					</nav>
+
+					<div class="footer-privacy-column">
+						<p class="footer-heading">Privacy by design</p>
+
+						<div class="footer-privacy-card">
+							<div class="footer-privacy-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24">
+									<rect x="5" y="10" width="14" height="11" rx="2"></rect>
+									<path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+								</svg>
+							</div>
+
+							<div>
+								<strong>Your birth date stays with you.</strong>
+								<p>
+									Calculations happen locally in your browser. Your selected
+									birth date is not uploaded to an account or stored by this tool.
+								</p>
+							</div>
+						</div>
+
+						<a class="footer-back-link" href="/">
+							Back to calculator
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 19V5"></path>
+								<path d="m6 11 6-6 6 6"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+
+				<div class="footer-bottom">
+					<p>
+						© <span id="current-year"></span> Universal Age Calculator.
+						All calculations are provided for informational use.
+					</p>
+
+					<div class="footer-bottom-links">
+						<a href="/about">About</a>
+						<span aria-hidden="true">•</span>
+						<a href="/privacy">Privacy Policy</a>
+						<span aria-hidden="true">•</span>
+						<a href="/terms" aria-current="page">Terms of Use</a>
+						<span aria-hidden="true">•</span>
+						<p class="footer-bottom-note">Fast, accessible and browser-based.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			const themeToggle = document.querySelector("#theme-toggle");
+			const currentYearElement = document.querySelector("#current-year");
+			const revealElements = document.querySelectorAll(".reveal");
+			const policySections = document.querySelectorAll(".policy-block[id]");
+			const navLinks = document.querySelectorAll("[data-section-link]");
+
+			if (currentYearElement) {
+				currentYearElement.textContent = String(new Date().getFullYear());
+			}
+
+			updateThemeButton();
+
+			themeToggle?.addEventListener("click", () => {
+				const isDark =
+					document.documentElement.dataset.theme === "dark";
+
+				if (isDark) {
+					delete document.documentElement.dataset.theme;
+					localStorage.setItem("age-calculator-theme", "light");
+				} else {
+					document.documentElement.dataset.theme = "dark";
+					localStorage.setItem("age-calculator-theme", "dark");
+				}
+
+				updateThemeButton();
+			});
+
+			if ("IntersectionObserver" in window) {
+				const revealObserver = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+
+							entry.target.classList.add("is-visible");
+							revealObserver.unobserve(entry.target);
+						});
+					},
+					{
+						threshold: 0.1,
+						rootMargin: "0px 0px -35px 0px",
+					},
+				);
+
+				revealElements.forEach((element) => revealObserver.observe(element));
+
+				const navObserver = new IntersectionObserver(
+					(entries) => {
+						const visible = entries
+							.filter((entry) => entry.isIntersecting)
+							.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+						const active = visible[0]?.target;
+
+						if (!(active instanceof HTMLElement)) return;
+
+						navLinks.forEach((link) => {
+							const isActive =
+								link.getAttribute("data-section-link") === active.id;
+
+							link.classList.toggle("is-active", isActive);
+
+							if (isActive) {
+								link.setAttribute("aria-current", "true");
+							} else {
+								link.removeAttribute("aria-current");
+							}
+						});
+					},
+					{
+						rootMargin: "-20% 0px -62% 0px",
+						threshold: [0, 0.15, 0.4],
+					},
+				);
+
+				policySections.forEach((section) => navObserver.observe(section));
+			} else {
+				revealElements.forEach((element) =>
+					element.classList.add("is-visible"),
+				);
+			}
+
+			function updateThemeButton() {
+				if (!(themeToggle instanceof HTMLButtonElement)) return;
+
+				const isDark =
+					document.documentElement.dataset.theme === "dark";
+
+				themeToggle.setAttribute(
+					"aria-label",
+					isDark ? "Switch to light mode" : "Switch to dark mode",
+				);
+			}
+		</script>
+	</body>
+</html>
+
+<style>
+	:root {
+		color-scheme: light;
+
+		--background: #f7f8fc;
+		--background-soft: rgba(255, 255, 255, 0.56);
+		--surface: #ffffff;
+		--surface-soft: #f6f7fb;
+		--surface-raised: rgba(255, 255, 255, 0.9);
+		--text: #182230;
+		--text-soft: #667085;
+		--text-faint: #8791a3;
+		--border: rgba(24, 34, 48, 0.09);
+		--border-strong: #d0d5dd;
+		--primary: #6657ff;
+		--primary-dark: #5545d9;
+		--primary-soft: #f0efff;
+		--primary-text: #5548c6;
+		--success: #0c8a61;
+		--success-soft: #e9fbf4;
+		--header-background: rgba(255, 255, 255, 0.78);
+		--shadow:
+			0 24px 65px rgba(52, 64, 84, 0.1),
+			0 4px 12px rgba(52, 64, 84, 0.04);
+
+		font-family:
+			Inter, ui-sans-serif, system-ui, -apple-system,
+			BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+		color: var(--text);
+		background: var(--background);
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+	}
+
+	:root[data-theme="dark"] {
+		color-scheme: dark;
+
+		--background: #0d1018;
+		--background-soft: rgba(18, 22, 33, 0.74);
+		--surface: #161b27;
+		--surface-soft: #1d2331;
+		--surface-raised: rgba(22, 27, 39, 0.94);
+		--text: #f4f6fb;
+		--text-soft: #b1b8c7;
+		--text-faint: #8992a5;
+		--border: rgba(255, 255, 255, 0.09);
+		--border-strong: #394152;
+		--primary: #877aff;
+		--primary-dark: #6657ff;
+		--primary-soft: rgba(116, 101, 255, 0.15);
+		--primary-text: #b6aeff;
+		--success: #5ee0ad;
+		--success-soft: rgba(16, 185, 129, 0.12);
+		--header-background: rgba(13, 16, 24, 0.8);
+		--shadow:
+			0 26px 70px rgba(0, 0, 0, 0.28),
+			0 4px 12px rgba(0, 0, 0, 0.18);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 100px;
+		background: var(--background);
+	}
+
+	body {
+		min-width: 320px;
+		margin: 0;
+		overflow-x: hidden;
+		background:
+			radial-gradient(
+				circle at 12% 12%,
+				rgba(102, 87, 255, 0.1),
+				transparent 27rem
+			),
+			radial-gradient(
+				circle at 88% 18%,
+				rgba(20, 184, 166, 0.07),
+				transparent 25rem
+			),
+			var(--background);
+		color: var(--text);
+		transition:
+			background-color 200ms ease,
+			color 200ms ease;
+	}
+
+	a,
+	button {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	button {
+		font: inherit;
+	}
+
+	svg {
+		display: block;
+		width: 1em;
+		height: 1em;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.container {
+		width: min(1120px, calc(100% - 40px));
+		margin-inline: auto;
+	}
+
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--border);
+		background: var(--header-background);
+		backdrop-filter: blur(18px);
+	}
+
+	.header-inner {
+		display: flex;
+		min-height: 76px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.brand-icon {
+		display: grid;
+		width: 42px;
+		height: 42px;
+		place-items: center;
+		border-radius: 14px;
+		color: white;
+		background: linear-gradient(135deg, #6657ff, #8b5cf6);
+		box-shadow: 0 12px 26px rgba(102, 87, 255, 0.25);
+	}
+
+	.brand-icon svg {
+		width: 21px;
+		height: 21px;
+		fill: currentColor;
+		stroke: none;
+	}
+
+	.brand-copy strong,
+	.brand-copy small {
+		display: block;
+	}
+
+	.brand-copy strong {
+		font-size: 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.brand-copy small {
+		margin-top: 1px;
+		color: var(--text-soft);
+		font-size: 0.75rem;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.header-badge {
+		padding: 8px 12px;
+		border: 1px solid var(--border-strong);
+		border-radius: 999px;
+		color: var(--text-soft);
+		background: var(--surface-raised);
+		font-size: 0.78rem;
+		font-weight: 700;
+	}
+
+	.header-link {
+		text-decoration: none;
+		transition:
+			color 160ms ease,
+			border-color 160ms ease,
+			transform 160ms ease;
+	}
+
+	.header-link:hover {
+		color: var(--primary-text);
+		border-color: rgba(102, 87, 255, 0.28);
+		transform: translateY(-1px);
+	}
+
+	.theme-toggle {
+		display: grid;
+		width: 40px;
+		height: 40px;
+		place-items: center;
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		color: var(--text);
+		background: var(--surface-raised);
+		transition:
+			transform 160ms ease,
+			border-color 160ms ease;
+	}
+
+	.theme-toggle:hover {
+		transform: translateY(-2px);
+		border-color: var(--primary);
+	}
+
+	.theme-toggle svg {
+		width: 19px;
+		height: 19px;
+	}
+
+	.moon-icon {
+		display: none;
+	}
+
+	:root[data-theme="dark"] .sun-icon {
+		display: none;
+	}
+
+	:root[data-theme="dark"] .moon-icon {
+		display: block;
+	}
+
+	.policy-hero {
+		position: relative;
+		padding: 92px 0 88px;
+		overflow: hidden;
+		border-bottom: 1px solid var(--border);
+		background:
+			linear-gradient(
+				180deg,
+				rgba(102, 87, 255, 0.045),
+				transparent 74%
+			);
+	}
+
+	.policy-hero-inner {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.72fr);
+		align-items: center;
+		gap: 76px;
+	}
+
+	.hero-orb,
+	.hero-spark {
+		position: absolute;
+		pointer-events: none;
+	}
+
+	.hero-orb {
+		border-radius: 50%;
+		filter: blur(4px);
+	}
+
+	.hero-orb-one {
+		top: -220px;
+		right: 6%;
+		width: 470px;
+		height: 470px;
+		background: rgba(102, 87, 255, 0.075);
+	}
+
+	.hero-orb-two {
+		bottom: -280px;
+		left: -130px;
+		width: 430px;
+		height: 430px;
+		border: 1px solid rgba(102, 87, 255, 0.08);
+		background: rgba(102, 87, 255, 0.025);
+	}
+
+	.hero-spark {
+		z-index: 1;
+		color: rgba(102, 87, 255, 0.3);
+	}
+
+	.hero-spark-one {
+		top: 23%;
+		left: 5%;
+	}
+
+	.hero-spark-two {
+		right: 4%;
+		bottom: 16%;
+		font-size: 0.75rem;
+	}
+
+	.hero-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 16px;
+		color: var(--primary-text);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.kicker-dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--primary);
+		box-shadow: 0 0 0 5px rgba(102, 87, 255, 0.1);
+	}
+
+	.eyebrow,
+	.summary-label {
+		margin: 0 0 12px;
+		color: var(--primary-text);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin-top: 0;
+	}
+
+	h1 {
+		margin-bottom: 22px;
+		font-size: clamp(3.2rem, 6vw, 5.75rem);
+		line-height: 0.98;
+		letter-spacing: -0.065em;
+	}
+
+	.hero-description {
+		max-width: 720px;
+		margin-bottom: 25px;
+		color: var(--text-soft);
+		font-size: clamp(1rem, 1.6vw, 1.13rem);
+		line-height: 1.78;
+	}
+
+	.policy-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+	}
+
+	.meta-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 8px 10px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-faint);
+		background: var(--surface-raised);
+		font-size: 0.7rem;
+		font-weight: 700;
+	}
+
+	.meta-pill svg {
+		width: 14px;
+		height: 14px;
+		color: var(--primary);
+	}
+
+	.privacy-summary {
+		position: relative;
+		padding: 28px;
+		overflow: hidden;
+		border: 1px solid rgba(102, 87, 255, 0.16);
+		border-radius: 26px;
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.08),
+				transparent 70%
+			),
+			var(--surface-raised);
+		box-shadow: var(--shadow);
+	}
+
+	.privacy-summary::after {
+		position: absolute;
+		top: -75px;
+		right: -70px;
+		width: 180px;
+		height: 180px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.07);
+	}
+
+	.summary-top {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		margin-bottom: 22px;
+	}
+
+	.summary-icon {
+		display: grid;
+		width: 48px;
+		height: 48px;
+		place-items: center;
+		border-radius: 15px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.summary-icon svg {
+		width: 22px;
+		height: 22px;
+	}
+
+	.summary-status {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 7px 9px;
+		border: 1px solid rgba(12, 138, 97, 0.14);
+		border-radius: 999px;
+		color: var(--success);
+		background: var(--success-soft);
+		font-size: 0.65rem;
+		font-weight: 850;
+	}
+
+	.summary-status > span {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: currentColor;
+		box-shadow: 0 0 0 4px rgba(12, 138, 97, 0.08);
+	}
+
+	.privacy-summary > .summary-label,
+	.privacy-summary > h2,
+	.privacy-summary > p,
+	.summary-points {
+		position: relative;
+		z-index: 1;
+	}
+
+	.privacy-summary h2 {
+		margin-bottom: 10px;
+		font-size: 1.45rem;
+		line-height: 1.2;
+		letter-spacing: -0.04em;
+	}
+
+	.privacy-summary > p:not(.summary-label) {
+		margin-bottom: 19px;
+		color: var(--text-soft);
+		font-size: 0.84rem;
+		line-height: 1.7;
+	}
+
+	.summary-points {
+		display: grid;
+		gap: 9px;
+		padding-top: 17px;
+		border-top: 1px solid var(--border);
+	}
+
+	.summary-points span {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--text-soft);
+		font-size: 0.74rem;
+		font-weight: 700;
+	}
+
+	.summary-points svg {
+		width: 14px;
+		height: 14px;
+		flex: 0 0 auto;
+		color: var(--success);
+		stroke-width: 2.5;
+	}
+
+	.policy-section {
+		padding: 86px 0 96px;
+	}
+
+	.policy-layout {
+		display: grid;
+		grid-template-columns: 250px minmax(0, 760px);
+		justify-content: space-between;
+		gap: clamp(48px, 7vw, 92px);
+	}
+
+	.policy-nav-wrap {
+		min-width: 0;
+	}
+
+	.policy-nav {
+		position: sticky;
+		top: 102px;
+		padding: 17px;
+		border: 1px solid var(--border);
+		border-radius: 22px;
+		background: var(--surface-raised);
+		box-shadow: 0 16px 38px rgba(52, 64, 84, 0.06);
+	}
+
+	.policy-nav-heading {
+		display: flex;
+		align-items: center;
+		gap: 11px;
+		padding: 4px 5px 15px;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.nav-icon {
+		display: grid;
+		width: 36px;
+		height: 36px;
+		place-items: center;
+		border-radius: 11px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.nav-icon svg {
+		width: 17px;
+		height: 17px;
+	}
+
+	.policy-nav-heading p {
+		margin: 0;
+		color: var(--text);
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.policy-nav-heading small {
+		display: block;
+		margin-top: 2px;
+		color: var(--text-faint);
+		font-size: 0.65rem;
+		font-weight: 700;
+	}
+
+	.nav-links {
+		display: grid;
+		gap: 2px;
+		padding: 12px 0;
+	}
+
+	.nav-links a {
+		display: grid;
+		grid-template-columns: 24px minmax(0, 1fr);
+		gap: 7px;
+		align-items: center;
+		padding: 8px 8px;
+		border-radius: 10px;
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		font-weight: 700;
+		line-height: 1.35;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			background 180ms ease,
+			transform 180ms ease;
+	}
+
+	.nav-links a > span {
+		color: var(--text-faint);
+		font-size: 0.59rem;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+		transition: color 180ms ease;
+	}
+
+	.nav-links a:hover,
+	.nav-links a.is-active {
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		transform: translateX(2px);
+	}
+
+	.nav-links a:hover > span,
+	.nav-links a.is-active > span {
+		color: var(--primary);
+	}
+
+	.nav-privacy-note {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 9px;
+		padding: 12px;
+		border: 1px solid rgba(12, 138, 97, 0.12);
+		border-radius: 13px;
+		background: var(--success-soft);
+	}
+
+	.nav-note-icon {
+		display: grid;
+		width: 28px;
+		height: 28px;
+		place-items: center;
+		border-radius: 9px;
+		color: var(--success);
+		background: var(--surface);
+	}
+
+	.nav-note-icon svg {
+		width: 14px;
+		height: 14px;
+	}
+
+	.nav-privacy-note p {
+		margin: 0;
+		color: var(--success);
+		font-size: 0.66rem;
+		font-weight: 750;
+		line-height: 1.5;
+	}
+
+	.policy-content {
+		min-width: 0;
+	}
+
+	.policy-block {
+		position: relative;
+		padding: 0 0 48px;
+		margin-bottom: 48px;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.policy-block:last-of-type {
+		margin-bottom: 0;
+	}
+
+	.section-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 18px;
+		margin-bottom: 9px;
+	}
+
+	.section-number {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		color: var(--primary-text);
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.section-number::after {
+		width: 32px;
+		height: 1px;
+		content: "";
+		background: rgba(102, 87, 255, 0.24);
+	}
+
+	.section-icon {
+		display: grid;
+		width: 39px;
+		height: 39px;
+		place-items: center;
+		border: 1px solid rgba(102, 87, 255, 0.1);
+		border-radius: 12px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.section-icon svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.policy-block h2 {
+		margin: 0 0 18px;
+		font-size: clamp(1.75rem, 3vw, 2.35rem);
+		line-height: 1.12;
+		letter-spacing: -0.045em;
+	}
+
+	.policy-block > p {
+		margin: 0 0 16px;
+		color: var(--text-soft);
+		font-size: 0.94rem;
+		line-height: 1.85;
+	}
+
+	.policy-block > p:last-child {
+		margin-bottom: 0;
+	}
+
+	.policy-callout {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 13px;
+		margin-top: 24px;
+		padding: 18px;
+		border: 1px solid rgba(102, 87, 255, 0.14);
+		border-radius: 17px;
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.06),
+				transparent 72%
+			),
+			var(--surface-soft);
+	}
+
+	.policy-callout.callout-success {
+		border-color: rgba(12, 138, 97, 0.14);
+		background:
+			linear-gradient(
+				135deg,
+				rgba(12, 138, 97, 0.06),
+				transparent 72%
+			),
+			var(--surface-soft);
+	}
+
+	.callout-icon {
+		display: grid;
+		width: 36px;
+		height: 36px;
+		place-items: center;
+		border-radius: 11px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.callout-success .callout-icon {
+		color: var(--success);
+		background: var(--success-soft);
+	}
+
+	.callout-icon svg {
+		width: 17px;
+		height: 17px;
+	}
+
+	.policy-callout strong {
+		display: block;
+		margin-bottom: 5px;
+		color: var(--text);
+		font-size: 0.82rem;
+	}
+
+	.policy-callout p {
+		margin: 0;
+		color: var(--text-soft);
+		font-size: 0.8rem;
+		line-height: 1.65;
+	}
+
+	.info-strip {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		margin-top: 23px;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		border-radius: 17px;
+		background: var(--surface);
+	}
+
+	.info-strip > div {
+		padding: 16px;
+		border-left: 1px solid var(--border);
+	}
+
+	.info-strip > div:first-child {
+		border-left: 0;
+	}
+
+	.info-strip span,
+	.info-strip strong {
+		display: block;
+	}
+
+	.info-strip span {
+		margin-bottom: 4px;
+		color: var(--text-faint);
+		font-size: 0.64rem;
+		font-weight: 850;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+	}
+
+	.info-strip strong {
+		color: var(--text);
+		font-size: 0.76rem;
+		line-height: 1.4;
+	}
+
+	.data-table {
+		overflow: hidden;
+		margin: 23px 0;
+		border: 1px solid var(--border);
+		border-radius: 17px;
+		background: var(--surface);
+		box-shadow: 0 12px 28px rgba(52, 64, 84, 0.035);
+	}
+
+	.data-row {
+		display: grid;
+		grid-template-columns: 1fr 1.35fr 1.25fr;
+	}
+
+	.data-row > span {
+		min-width: 0;
+		padding: 14px 16px;
+		border-left: 1px solid var(--border);
+		color: var(--text-soft);
+		font-size: 0.76rem;
+		line-height: 1.5;
+	}
+
+	.data-row > span:first-child {
+		border-left: 0;
+	}
+
+	.data-head {
+		background: var(--surface-soft);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.data-head > span {
+		color: var(--text);
+		font-size: 0.67rem;
+		font-weight: 900;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	code {
+		padding: 4px 7px;
+		border-radius: 7px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.71rem;
+		font-weight: 750;
+	}
+
+	.future-card {
+		position: relative;
+		margin-top: 23px;
+		padding: 19px 20px;
+		overflow: hidden;
+		border: 1px solid rgba(102, 87, 255, 0.14);
+		border-radius: 17px;
+		background: var(--surface);
+	}
+
+	.future-card::after {
+		position: absolute;
+		top: -65px;
+		right: -55px;
+		width: 140px;
+		height: 140px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.06);
+	}
+
+	.future-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.future-status {
+		display: inline-flex;
+		margin-bottom: 11px;
+		padding: 6px 9px;
+		border-radius: 999px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.62rem;
+		font-weight: 900;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+	}
+
+	.future-card strong {
+		display: block;
+		margin-bottom: 6px;
+		font-size: 0.83rem;
+		line-height: 1.45;
+	}
+
+	.future-card p {
+		margin: 0;
+		color: var(--text-soft);
+		font-size: 0.78rem;
+		line-height: 1.65;
+	}
+
+	.choice-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+		margin-top: 23px;
+	}
+
+	.choice-grid > div {
+		padding: 16px;
+		border: 1px solid var(--border);
+		border-radius: 15px;
+		background: var(--surface);
+	}
+
+	.choice-grid span {
+		display: grid;
+		width: 29px;
+		height: 29px;
+		place-items: center;
+		margin-bottom: 12px;
+		border-radius: 9px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.61rem;
+		font-weight: 900;
+	}
+
+	.choice-grid strong {
+		display: block;
+		margin-bottom: 5px;
+		font-size: 0.78rem;
+	}
+
+	.choice-grid p {
+		margin: 0;
+		color: var(--text-faint);
+		font-size: 0.69rem;
+		line-height: 1.55;
+	}
+
+	.policy-end-card {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		margin-top: 48px;
+		padding: 30px;
+		overflow: hidden;
+		border: 1px solid rgba(102, 87, 255, 0.17);
+		border-radius: 24px;
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.09),
+				transparent 72%
+			),
+			var(--surface);
+		box-shadow: 0 18px 44px rgba(52, 64, 84, 0.07);
+	}
+
+	.end-card-glow {
+		position: absolute;
+		top: -130px;
+		right: -95px;
+		width: 290px;
+		height: 290px;
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.085);
+		pointer-events: none;
+	}
+
+	.end-card-copy,
+	.policy-end-card > a {
+		position: relative;
+		z-index: 1;
+	}
+
+	.policy-end-card h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		letter-spacing: -0.035em;
+	}
+
+	.end-card-copy > p:not(.eyebrow) {
+		max-width: 480px;
+		margin: 9px 0 0;
+		color: var(--text-soft);
+		font-size: 0.82rem;
+		line-height: 1.65;
+	}
+
+	.end-card-trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 15px;
+	}
+
+	.end-card-trust span {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--text-faint);
+		font-size: 0.7rem;
+		font-weight: 700;
+	}
+
+	.end-card-trust svg {
+		width: 13px;
+		height: 13px;
+		color: var(--success);
+		stroke-width: 2.5;
+	}
+
+	.policy-end-card > a {
+		display: inline-flex;
+		flex: 0 0 auto;
+		align-items: center;
+		gap: 9px;
+		padding: 13px 17px;
+		border-radius: 12px;
+		color: white;
+		background: linear-gradient(135deg, var(--primary), #7c4dff);
+		box-shadow: 0 12px 28px rgba(102, 87, 255, 0.24);
+		font-size: 0.78rem;
+		font-weight: 850;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.policy-end-card > a:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 16px 34px rgba(102, 87, 255, 0.3);
+	}
+
+	.policy-end-card > a svg {
+		width: 15px;
+		height: 15px;
+	}
+
+	.site-footer {
+		position: relative;
+		padding: 72px 0 26px;
+		overflow: hidden;
+		border-top: 1px solid rgba(102, 87, 255, 0.15);
+		background:
+			linear-gradient(
+				180deg,
+				rgba(102, 87, 255, 0.035),
+				transparent 24%
+			),
+			var(--surface-raised);
+	}
+
+	.footer-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(12px);
+		pointer-events: none;
+	}
+
+	.footer-glow-one {
+		top: -220px;
+		left: -180px;
+		width: 440px;
+		height: 440px;
+		background: rgba(102, 87, 255, 0.08);
+	}
+
+	.footer-glow-two {
+		right: -150px;
+		bottom: -250px;
+		width: 420px;
+		height: 420px;
+		background: rgba(124, 92, 231, 0.075);
+	}
+
+	.footer-shell {
+		position: relative;
+		z-index: 1;
+	}
+
+	.footer-main {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(190px, 0.65fr) minmax(260px, 0.9fr);
+		gap: clamp(38px, 6vw, 82px);
+		padding-bottom: 48px;
+	}
+
+	.footer-brand-column,
+	.footer-privacy-column {
+		min-width: 0;
+	}
+
+	.footer-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--text);
+		text-decoration: none;
+	}
+
+	.footer-brand-icon {
+		display: grid;
+		width: 44px;
+		height: 44px;
+		place-items: center;
+		border: 1px solid rgba(102, 87, 255, 0.2);
+		border-radius: 14px;
+		background: linear-gradient(
+			135deg,
+			rgba(102, 87, 255, 0.14),
+			rgba(124, 92, 231, 0.06)
+		);
+		box-shadow: 0 10px 24px rgba(102, 87, 255, 0.09);
+	}
+
+	.footer-brand-icon svg {
+		width: 23px;
+		height: 23px;
+		fill: var(--primary);
+		stroke: none;
+	}
+
+	.footer-brand-copy {
+		display: grid;
+		gap: 1px;
+	}
+
+	.footer-brand-copy strong {
+		font-size: 1rem;
+		font-weight: 900;
+		letter-spacing: -0.025em;
+	}
+
+	.footer-brand-copy small {
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		font-weight: 750;
+		letter-spacing: 0.065em;
+		text-transform: uppercase;
+	}
+
+	.footer-description {
+		max-width: 480px;
+		margin: 22px 0 24px;
+		color: var(--text-soft);
+		font-size: 0.92rem;
+		line-height: 1.75;
+	}
+
+	.footer-trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 9px;
+	}
+
+	.footer-trust span {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		padding: 8px 11px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: var(--surface-soft);
+		color: var(--text-soft);
+		font-size: 0.72rem;
+		font-weight: 750;
+	}
+
+	.footer-trust svg {
+		width: 14px;
+		height: 14px;
+		color: var(--success);
+		stroke-width: 2.5;
+	}
+
+	.footer-heading {
+		margin: 4px 0 18px;
+		color: var(--text);
+		font-size: 0.76rem;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.footer-navigation {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.footer-navigation a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 18px;
+		padding: 9px 0;
+		border-bottom: 1px solid transparent;
+		color: var(--text-soft);
+		font-size: 0.84rem;
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			transform 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.footer-navigation a svg {
+		width: 15px;
+		height: 15px;
+		flex: 0 0 auto;
+		color: var(--text-faint);
+		opacity: 0;
+		transform: translateX(-5px);
+		transition:
+			opacity 180ms ease,
+			transform 180ms ease,
+			color 180ms ease;
+	}
+
+	.footer-privacy-card {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 14px;
+		padding: 18px;
+		border: 1px solid rgba(102, 87, 255, 0.14);
+		border-radius: 18px;
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.07),
+				transparent 70%
+			),
+			var(--surface-soft);
+		box-shadow: 0 14px 34px rgba(52, 64, 84, 0.045);
+	}
+
+	.footer-privacy-icon {
+		display: grid;
+		width: 36px;
+		height: 36px;
+		place-items: center;
+		border-radius: 11px;
+		color: var(--primary);
+		background: rgba(102, 87, 255, 0.1);
+	}
+
+	.footer-privacy-icon svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.footer-privacy-card strong {
+		display: block;
+		margin-bottom: 6px;
+		color: var(--text);
+		font-size: 0.84rem;
+		line-height: 1.4;
+	}
+
+	.footer-privacy-card p {
+		margin: 0;
+		color: var(--text-faint);
+		font-size: 0.75rem;
+		line-height: 1.65;
+	}
+
+	.footer-back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 18px;
+		color: var(--primary-text);
+		font-size: 0.78rem;
+		font-weight: 850;
+		text-decoration: none;
+		transition:
+			color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.footer-back-link svg {
+		width: 15px;
+		height: 15px;
+	}
+
+	.footer-bottom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		padding-top: 22px;
+		border-top: 1px solid var(--border);
+	}
+
+	.footer-bottom p {
+		margin: 0;
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		line-height: 1.6;
+	}
+
+	.footer-bottom-links {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		flex: 0 0 auto;
+	}
+
+	.footer-bottom-links > span {
+		color: var(--text-faint);
+		font-size: 0.68rem;
+	}
+
+	.footer-bottom-links a {
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		font-weight: 750;
+		text-decoration: none;
+		transition: color 180ms ease;
+	}
+
+	.footer-bottom-links a:hover,
+	.footer-bottom-links a[aria-current="page"] {
+		color: var(--primary-text);
+	}
+
+	.footer-bottom-note {
+		flex: 0 0 auto;
+	}
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(18px);
+		transition:
+			opacity 560ms ease,
+			transform 560ms ease;
+	}
+
+	.reveal.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (hover: hover) {
+		.nav-links a:hover {
+			transform: translateX(2px);
+		}
+
+		.info-strip > div,
+		.choice-grid > div,
+		.future-card,
+		.data-table {
+			transition:
+				transform 180ms ease,
+				border-color 180ms ease,
+				box-shadow 180ms ease;
+		}
+
+		.info-strip > div:hover,
+		.choice-grid > div:hover {
+			background: var(--primary-soft);
+		}
+
+		.choice-grid > div:hover,
+		.future-card:hover,
+		.data-table:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 87, 255, 0.2);
+			box-shadow: 0 16px 34px rgba(52, 64, 84, 0.07);
+		}
+
+		.footer-navigation a:hover {
+			color: var(--primary-text);
+			border-color: rgba(102, 87, 255, 0.12);
+			transform: translateX(3px);
+		}
+
+		.footer-navigation a:hover svg {
+			color: var(--primary);
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		.footer-back-link:hover {
+			transform: translateY(-2px);
+		}
+	}
+
+	button:focus-visible,
+	a:focus-visible {
+		outline: 3px solid rgba(102, 87, 255, 0.42);
+		outline-offset: 3px;
+	}
+
+	@media (max-width: 960px) {
+		.policy-hero-inner {
+			grid-template-columns: 1fr;
+			gap: 44px;
+		}
+
+		.policy-hero-copy {
+			text-align: center;
+		}
+
+		.hero-description {
+			margin-inline: auto;
+		}
+
+		.policy-meta {
+			justify-content: center;
+		}
+
+		.privacy-summary {
+			width: min(100%, 620px);
+			margin-inline: auto;
+		}
+
+		.policy-layout {
+			grid-template-columns: 1fr;
+			gap: 36px;
+		}
+
+		.policy-nav {
+			position: static;
+		}
+
+		.nav-links {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.nav-privacy-note {
+			max-width: 420px;
+		}
+
+		.footer-main {
+			grid-template-columns: 1fr;
+			gap: 38px;
+			padding-bottom: 38px;
+		}
+
+		.footer-description {
+			max-width: 600px;
+		}
+
+		.footer-navigation {
+			max-width: 440px;
+		}
+
+		.footer-privacy-column {
+			max-width: 600px;
+		}
+
+		.footer-bottom {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.footer-bottom-links {
+			flex-wrap: wrap;
+			flex: initial;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.container {
+			width: min(1120px, calc(100% - 28px));
+		}
+
+		.header-badge {
+			display: none;
+		}
+
+		.policy-hero {
+			padding: 66px 0 66px;
+		}
+
+		.policy-section {
+			padding: 66px 0 78px;
+		}
+
+		.nav-links {
+			grid-template-columns: 1fr;
+		}
+
+		.info-strip,
+		.choice-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.info-strip > div {
+			border-top: 1px solid var(--border);
+			border-left: 0;
+		}
+
+		.info-strip > div:first-child {
+			border-top: 0;
+		}
+
+		.data-row {
+			grid-template-columns: 1fr;
+		}
+
+		.data-row > span {
+			border-top: 1px solid var(--border);
+			border-left: 0;
+		}
+
+		.data-row > span:first-child {
+			border-top: 0;
+		}
+
+		.data-head {
+			display: none;
+		}
+
+		.policy-end-card {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.site-footer {
+			padding-top: 56px;
+		}
+	}
+
+	@media (max-width: 430px) {
+		.brand-copy small {
+			display: none;
+		}
+
+		h1 {
+			font-size: clamp(3rem, 16vw, 4.3rem);
+		}
+
+		.policy-meta {
+			align-items: stretch;
+			flex-direction: column;
+		}
+
+		.meta-pill {
+			justify-content: center;
+		}
+
+		.summary-top {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.footer-trust {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.footer-trust span {
+			width: 100%;
+			justify-content: flex-start;
+		}
+	}
+
+
+	.terms-status {
+		color: var(--primary-text);
+		border-color: rgba(102, 87, 255, 0.14);
+		background: var(--primary-soft);
+	}
+
+	.terms-status > span {
+		background: var(--primary);
+		box-shadow: 0 0 0 4px rgba(102, 87, 255, 0.09);
+	}
+
+	.terms-nav-note {
+		border-color: rgba(102, 87, 255, 0.12);
+		background: var(--primary-soft);
+	}
+
+	.terms-nav-note .nav-note-icon {
+		color: var(--primary);
+		background: var(--surface);
+	}
+
+	.terms-nav-note p {
+		color: var(--primary-text);
+	}
+
+	.terms-callout {
+		border-color: rgba(102, 87, 255, 0.16);
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.075),
+				transparent 72%
+			),
+			var(--surface-soft);
+	}
+
+	.terms-context-card {
+		border-color: rgba(102, 87, 255, 0.16);
+	}
+
+	.premium-related-card {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 18px;
+		margin-top: 48px;
+		padding: 22px;
+		border: 1px solid var(--border);
+		border-radius: 20px;
+		background: var(--surface);
+		box-shadow: 0 14px 34px rgba(52, 64, 84, 0.05);
+	}
+
+	.related-policy-icon {
+		display: grid;
+		width: 44px;
+		height: 44px;
+		place-items: center;
+		border-radius: 13px;
+		color: var(--primary);
+		background: var(--primary-soft);
+	}
+
+	.related-policy-icon svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.premium-related-card .eyebrow {
+		margin-bottom: 5px;
+	}
+
+	.premium-related-card h2 {
+		margin: 0 0 5px;
+		font-size: 1.05rem;
+		letter-spacing: -0.025em;
+	}
+
+	.premium-related-card p:not(.eyebrow) {
+		margin: 0;
+		color: var(--text-soft);
+		font-size: 0.76rem;
+		line-height: 1.55;
+	}
+
+	.premium-related-card > a {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 11px 14px;
+		border: 1px solid rgba(102, 87, 255, 0.18);
+		border-radius: 11px;
+		color: var(--primary-text);
+		background: var(--primary-soft);
+		font-size: 0.73rem;
+		font-weight: 850;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.premium-related-card > a svg {
+		width: 14px;
+		height: 14px;
+	}
+
+	@media (hover: hover) {
+		.premium-related-card > a:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 87, 255, 0.28);
+			box-shadow: 0 10px 22px rgba(102, 87, 255, 0.1);
+		}
+	}
+
+	@media (max-width: 720px) {
+		.premium-related-card {
+			grid-template-columns: auto minmax(0, 1fr);
+		}
+
+		.premium-related-card > a {
+			grid-column: 1 / -1;
+			justify-content: center;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+
+		.reveal {
+			opacity: 1;
+			transform: none;
+		}
+	}
+</style>

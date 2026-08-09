@@ -1096,9 +1096,15 @@ const faqItems = [
 						All calculations are provided for informational use.
 					</p>
 
-					<p class="footer-bottom-note">
-						Fast, accessible and browser-based.
-					</p>
+					<div class="footer-bottom-links">
+						<a href="/about">About</a>
+						<span aria-hidden="true">•</span>
+						<a href="/privacy">Privacy Policy</a>
+						<span aria-hidden="true">•</span>
+						<a href="/terms">Terms of Use</a>
+						<span aria-hidden="true">•</span>
+						<p class="footer-bottom-note">Fast, accessible and browser-based.</p>
+					</div>
 				</div>
 			</div>
 		</footer>
@@ -2073,7 +2079,62 @@ function getCalendarDateParts(date, calendar) {
 				}
 			}
 		</script>
-	</body>
+	
+		<script is:inline>
+			(function () {
+				const selectors = [
+					".hero-copy",
+					".calculator-card",
+					".age-guide-section .section-heading",
+					".guide-grid",
+					".traditions-guide-heading",
+					".traditions-explainer-grid",
+					".accuracy-panel",
+					".faq-heading-block",
+					".faq-list",
+				];
+
+				const elements = selectors.flatMap((selector) =>
+					Array.from(document.querySelectorAll(selector)),
+				);
+
+				if (!elements.length) return;
+
+				document.body.classList.add("home-polish-ready");
+
+				elements.forEach((element) => {
+					element.classList.add("home-polish-reveal");
+				});
+
+				if (
+					!("IntersectionObserver" in window) ||
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches
+				) {
+					elements.forEach((element) =>
+						element.classList.add("home-polish-visible"),
+					);
+					return;
+				}
+
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add("home-polish-visible");
+							observer.unobserve(entry.target);
+						});
+					},
+					{
+						threshold: 0.1,
+						rootMargin: "0px 0px -36px 0px",
+					},
+				);
+
+				elements.forEach((element) => observer.observe(element));
+			})();
+		</script>
+
+</body>
 </html>
 
 <style>
@@ -3963,6 +4024,30 @@ function getCalendarDateParts(date, calendar) {
 		line-height: 1.6;
 	}
 
+	.footer-bottom-links {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		flex: 0 0 auto;
+	}
+
+	.footer-bottom-links > span {
+		color: var(--text-faint);
+		font-size: 0.68rem;
+	}
+
+	.footer-bottom-links a {
+		color: var(--text-faint);
+		font-size: 0.72rem;
+		font-weight: 750;
+		text-decoration: none;
+		transition: color 180ms ease;
+	}
+
+	.footer-bottom-links a:hover {
+		color: var(--primary-text);
+	}
+
 	.footer-bottom-note {
 		flex: 0 0 auto;
 	}
@@ -4329,6 +4414,12 @@ function getCalendarDateParts(date, calendar) {
 			gap: 8px;
 		}
 
+		.footer-bottom-links {
+			align-items: flex-start;
+			flex-wrap: wrap;
+			flex: initial;
+		}
+
 		.footer-bottom-note {
 			flex: initial;
 		}
@@ -4396,4 +4487,499 @@ function getCalendarDateParts(date, calendar) {
 			transition-duration: 0.01ms !important;
 		}
 	}
+
+	/* =========================================================
+	   PREMIUM HOMEPAGE POLISH
+	   Matched to About / Privacy / Terms visual language.
+	   Presentation-only overrides: calculator logic is unchanged.
+	   ========================================================= */
+
+	.hero,
+	.results-section,
+	.age-guide-section,
+	.traditions-guide,
+	.faq-section {
+		position: relative;
+		isolation: isolate;
+	}
+
+	.hero {
+		overflow: hidden;
+		border-bottom: 1px solid var(--border);
+		background:
+			linear-gradient(
+				180deg,
+				rgba(102, 87, 255, 0.052),
+				transparent 74%
+			);
+	}
+
+	.hero::before,
+	.hero::after {
+		position: absolute;
+		z-index: -1;
+		content: "";
+		border-radius: 50%;
+		pointer-events: none;
+	}
+
+	.hero::before {
+		top: -240px;
+		right: 5%;
+		width: 500px;
+		height: 500px;
+		background: rgba(102, 87, 255, 0.075);
+		filter: blur(4px);
+	}
+
+	.hero::after {
+		bottom: -285px;
+		left: -145px;
+		width: 445px;
+		height: 445px;
+		border: 1px solid rgba(102, 87, 255, 0.09);
+		background: rgba(102, 87, 255, 0.025);
+		filter: blur(3px);
+	}
+
+	.hero-inner {
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-copy {
+		position: relative;
+	}
+
+	.hero-copy::before {
+		position: absolute;
+		top: -26px;
+		left: -34px;
+		content: "✦";
+		color: rgba(102, 87, 255, 0.28);
+		font-size: 0.88rem;
+		pointer-events: none;
+	}
+
+	.hero-copy h1 {
+		text-wrap: balance;
+	}
+
+	.hero-description {
+		line-height: 1.78;
+	}
+
+	.feature-row span {
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: var(--surface-raised);
+		box-shadow: 0 8px 22px rgba(52, 64, 84, 0.035);
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.calculator-card {
+		position: relative;
+		overflow: hidden;
+		border-color: rgba(102, 87, 255, 0.16);
+		background:
+			linear-gradient(
+				145deg,
+				rgba(102, 87, 255, 0.045),
+				transparent 48%
+			),
+			var(--surface-raised);
+		box-shadow:
+			0 28px 72px rgba(52, 64, 84, 0.13),
+			0 6px 18px rgba(52, 64, 84, 0.05);
+		transition:
+			transform 220ms ease,
+			border-color 220ms ease,
+			box-shadow 220ms ease;
+	}
+
+	.calculator-card::before {
+		position: absolute;
+		top: -105px;
+		right: -90px;
+		width: 235px;
+		height: 235px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.07);
+		pointer-events: none;
+	}
+
+	.calculator-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.calculator-heading {
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border);
+	}
+
+	#birth-date {
+		transition:
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			transform 180ms ease;
+	}
+
+	#birth-date:focus {
+		transform: translateY(-1px);
+		box-shadow:
+			0 0 0 4px rgba(102, 87, 255, 0.1),
+			0 10px 25px rgba(52, 64, 84, 0.06);
+	}
+
+	.preference-option {
+		transition:
+			transform 180ms ease,
+			border-color 180ms ease,
+			box-shadow 180ms ease,
+			background-color 180ms ease;
+	}
+
+	#age-form button {
+		box-shadow: 0 13px 30px rgba(102, 87, 255, 0.24);
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease,
+			filter 180ms ease;
+	}
+
+	.privacy-note {
+		padding-top: 16px;
+		border-top: 1px solid var(--border);
+	}
+
+	.results-section {
+		overflow: hidden;
+		background:
+			radial-gradient(
+				circle at 88% 8%,
+				rgba(102, 87, 255, 0.065),
+				transparent 26rem
+			),
+			var(--background-soft);
+	}
+
+	.results-section::before {
+		position: absolute;
+		top: 44px;
+		left: 5%;
+		content: "✦";
+		color: rgba(102, 87, 255, 0.24);
+		font-size: 0.82rem;
+		pointer-events: none;
+	}
+
+	.section-heading h2,
+	.panel-heading h3,
+	.statistics-heading h3,
+	.age-guide-section h2,
+	.faq-section h2,
+	.traditions-guide h3,
+	.accuracy-panel h3 {
+		text-wrap: balance;
+	}
+
+	.section-heading > p:last-child,
+	.panel-heading > p,
+	.faq-heading-block > p,
+	.traditions-guide-heading > p {
+		line-height: 1.75;
+	}
+
+	.age-highlight {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		color: white;
+		background:
+			linear-gradient(
+				130deg,
+				rgba(255, 255, 255, 0.09),
+				transparent 52%
+			),
+			linear-gradient(135deg, #302b63 0%, #5d4fe0 58%, #7659dd 100%);
+		box-shadow:
+			0 26px 62px rgba(69, 57, 173, 0.24),
+			0 5px 14px rgba(52, 64, 84, 0.055);
+	}
+
+	.age-highlight::after {
+		position: absolute;
+		top: -125px;
+		right: -95px;
+		bottom: auto;
+		left: auto;
+		width: 255px;
+		height: 255px;
+		content: "";
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.055);
+		pointer-events: none;
+	}
+
+	.age-highlight > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.result-card,
+	.calendar-card,
+	.statistic,
+	.fun-card,
+	.milestone-card,
+	.guide-step,
+	.traditions-explainer-grid article,
+	.faq-list details {
+		transition:
+			transform 190ms ease,
+			border-color 190ms ease,
+			box-shadow 190ms ease,
+			background-color 190ms ease;
+	}
+
+	.world-calendar-panel,
+	.statistics-panel,
+	.fun-statistics-panel,
+	.milestones-panel {
+		position: relative;
+		overflow: hidden;
+		border-color: rgba(102, 87, 255, 0.11);
+		background:
+			linear-gradient(
+				145deg,
+				rgba(102, 87, 255, 0.025),
+				transparent 38%
+			),
+			var(--surface);
+		box-shadow:
+			0 24px 60px rgba(52, 64, 84, 0.09),
+			0 4px 12px rgba(52, 64, 84, 0.035);
+	}
+
+	.world-calendar-panel::after,
+	.statistics-panel::after,
+	.fun-statistics-panel::after,
+	.milestones-panel::after {
+		position: absolute;
+		top: -115px;
+		right: -105px;
+		width: 235px;
+		height: 235px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.045);
+		pointer-events: none;
+	}
+
+	.world-calendar-panel > *,
+	.statistics-panel > *,
+	.fun-statistics-panel > *,
+	.milestones-panel > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.age-guide-section {
+		overflow: hidden;
+		border-top: 1px solid var(--border);
+		border-bottom: 1px solid var(--border);
+		background:
+			linear-gradient(
+				180deg,
+				var(--background-soft),
+				rgba(102, 87, 255, 0.018)
+			);
+	}
+
+	.age-guide-section::before {
+		position: absolute;
+		top: -210px;
+		right: -120px;
+		width: 420px;
+		height: 420px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.055);
+		pointer-events: none;
+	}
+
+	.age-guide-section .container,
+	.faq-section .container {
+		position: relative;
+		z-index: 1;
+	}
+
+	.traditions-guide {
+		overflow: hidden;
+		border-bottom: 1px solid var(--border);
+		background:
+			radial-gradient(
+				circle at 9% 15%,
+				rgba(102, 87, 255, 0.055),
+				transparent 24rem
+			),
+			var(--surface-raised);
+	}
+
+	.traditions-explainer-grid article {
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 16px 38px rgba(52, 64, 84, 0.045);
+	}
+
+	.traditions-explainer-grid article::before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 4px;
+		height: 100%;
+		content: "";
+		background: linear-gradient(
+			180deg,
+			var(--primary),
+			rgba(102, 87, 255, 0.15)
+		);
+		opacity: 0.68;
+	}
+
+	.accuracy-panel {
+		position: relative;
+		overflow: hidden;
+		border-color: rgba(102, 87, 255, 0.15);
+		background:
+			linear-gradient(
+				135deg,
+				rgba(102, 87, 255, 0.07),
+				transparent 70%
+			),
+			var(--surface);
+		box-shadow: 0 18px 44px rgba(52, 64, 84, 0.055);
+	}
+
+	.accuracy-panel::after {
+		position: absolute;
+		top: -100px;
+		right: -90px;
+		width: 220px;
+		height: 220px;
+		content: "";
+		border-radius: 50%;
+		background: rgba(102, 87, 255, 0.055);
+		pointer-events: none;
+	}
+
+	.faq-section {
+		overflow: hidden;
+		background:
+			linear-gradient(
+				180deg,
+				rgba(102, 87, 255, 0.025),
+				transparent 55%
+			),
+			var(--background);
+	}
+
+	.faq-section::after {
+		position: absolute;
+		right: 5%;
+		bottom: 7%;
+		content: "✦";
+		color: rgba(102, 87, 255, 0.22);
+		font-size: 0.8rem;
+		pointer-events: none;
+	}
+
+	.faq-list details[open] {
+		border-color: rgba(102, 87, 255, 0.2);
+		box-shadow: 0 16px 34px rgba(52, 64, 84, 0.065);
+	}
+
+	body.home-polish-ready .home-polish-reveal {
+		opacity: 0;
+		transform: translateY(18px);
+		transition:
+			opacity 560ms ease,
+			transform 560ms ease;
+	}
+
+	body.home-polish-ready .home-polish-reveal.home-polish-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (hover: hover) {
+		.feature-row span:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 87, 255, 0.22);
+			box-shadow: 0 12px 28px rgba(52, 64, 84, 0.07);
+		}
+
+		.calculator-card:hover {
+			transform: translateY(-3px);
+			border-color: rgba(102, 87, 255, 0.22);
+			box-shadow:
+				0 32px 78px rgba(52, 64, 84, 0.15),
+				0 8px 20px rgba(52, 64, 84, 0.055);
+		}
+
+		.preference-option:hover {
+			transform: translateY(-1px);
+			border-color: rgba(102, 87, 255, 0.22);
+			box-shadow: 0 10px 24px rgba(52, 64, 84, 0.05);
+		}
+
+		#age-form button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 17px 36px rgba(102, 87, 255, 0.3);
+			filter: saturate(1.04);
+		}
+
+		.result-card:hover,
+		.calendar-card:hover,
+		.statistic:hover,
+		.fun-card:hover,
+		.milestone-card:hover,
+		.guide-step:hover,
+		.traditions-explainer-grid article:hover {
+			transform: translateY(-3px);
+			border-color: rgba(102, 87, 255, 0.2);
+			box-shadow: 0 17px 36px rgba(52, 64, 84, 0.075);
+		}
+
+		.faq-list details:hover {
+			transform: translateY(-2px);
+			border-color: rgba(102, 87, 255, 0.18);
+			box-shadow: 0 14px 32px rgba(52, 64, 84, 0.055);
+		}
+
+		.faq-list summary:hover {
+			color: var(--primary-text);
+		}
+	}
+
+	@media (max-width: 960px) {
+		.hero-copy::before,
+		.results-section::before,
+		.faq-section::after {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		body.home-polish-ready .home-polish-reveal {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
 </style>
